@@ -1,245 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Irham Rahmat Saleh - Full Stack Developer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-        }
-
-        header {
-            background-color: #fe4e30;
-            padding: 15px 0;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            color: #fff;
-        }
-
-        .navbar .logo img {
-            height: 30px;
-            margin-left: 20px;
-        }
-
-        .nav-links {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-left: 20px;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .box {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 900px;
-            width: 100%;
-            box-sizing: border-box;
-            margin-top: 60px;
-        }
-
-        .info {
-            flex: 1;
-            padding-right: 20px;
-        }
-
-        .info h1 {
-            margin: 0;
-            font-size: 28px;
-            color: #333;
-        }
-
-        .info p {
-            margin: 10px 0;
-            color: #777;
-        }
-
-        .description {
-            margin: 10px 0;
-            color: #555;
-            font-style: italic;
-        }
-
-        .contact-download {
-            margin: 20px 0;
-        }
-
-        .contact-btn,
-        .cv-btn {
-            background-color: #fe4e30;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin: 5px;
-        }
-
-        .contact-btn:hover,
-        .cv-btn:hover {
-            background-color: #ad270f;
-        }
-
-        .social-media {
-            margin-top: 10px;
-        }
-
-        .social-media a img {
-            width: 30px;
-            margin: 0 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-media a img:hover {
-            transform: scale(1.2);
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid #fe4e30;
-            width: 300px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .card-header {
-            margin-bottom: 20px;
-        }
-
-        .photo-box {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        .card-body {
-            font-weight: bold;
-            color: #555;
-        }
-
-        .card-body p {
-            margin: 10px 0 0;
-        }
-
-        @media (max-width: 768px) {
-            .box {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .info {
-                max-width: 100%;
-                text-align: center;
-                padding-right: 0;
-            }
-
-            .card {
-                margin-top: 20px;
-            }
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Irham Rahmat Saleh - Full Stack Developer</title>
+	<link rel="stylesheet" href="assets/css/homeStyle.css">
 </head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="#"><img src="https://dumbways.id/assets/images/brandwhite.png" alt="Logo"></a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="contact.html">Contact Me</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div class="container">
-            <div class="box">
-                <div class="info">
-                    <h1>Hi, Welcome to My Web</h1>
-                    <p>A passionate Full Stack Developer with experience in building responsive and user-friendly web applications.
-                        My job and hobby is creating computer programs, everything related to information technology, electronics, mathematics and computer science, I have created several projects related to web development ranging from Front End, Back End to Database ( DBMS), the languages ​​and libraries that I use are JavaScript, ReactJs, React Native for mobile Apps, ExpressJS, Go and MySQL.
-                    </p>
-                    <div class="contact-download">
-                        <a href="contact.html" class="contact-btn">Contact</a>
-                        <a href="https://drive.google.com/file/d/11xQGHk2TU9oRhSyYENC8nDVS_b6e8m9N/view?usp=sharing" class="cv-btn" download>Download CV</a>
-                    </div>
-                    <div class="social-media">
-                        <a href="https://www.linkedin.com/in/irham-rahmat-saleh-a03153169/" target="_blank">
-                            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-                        </a>
-                        <a href="https://www.instagram.com/irhamsaleh904/?hl=en" target="_blank">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-                        </a>
-                        <a href="https://web.facebook.com/Irham.s4leh" target="_blank">
-                            <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook">
-                        </a>
-                        <a href="https://x.com/RichIrham" target="_blank">
-                            <img src="https://cdn-icons-png.flaticon.com/512/145/145812.png" alt="Twitter">
-                        </a>
-                        <a href="https://github.com/Irhamrahmatsaleh" target="_blank">
-                            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-                        </a>
 
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="photo-box">
-                            <img src="https://scontent.fcgk4-5.fna.fbcdn.net/v/t39.30808-6/435300569_1101854034378925_7965224793727079952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHb4mHG3vMn8S9RNRU_Zd84jeTI4VswWOGN5MjhWzBY4YhjCbiXGcuS7wv2gJkzk2y7zoR4tONRV62AEUAwAnJI&_nc_ohc=LBwiCsVBsIkQ7kNvgE6xRGx&_nc_zt=23&_nc_ht=scontent.fcgk4-5.fna&oh=00_AYDANcSeLIjc-SVUtFdBeuR4pzofjWGW-AAJd0TtigqZLA&oe=66D26166" alt="Profile Picture" class="profile-img">
-                        </div>
-                        <p>Irham Rahmat Saleh</p>
-                    </div>
-                    <div class="card-body">
-                        <p>Full Stack Developer</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+<body>
+	<header>
+		<nav class="navbar">
+			<div class="logo">
+				<a href="#"><img src="https://dumbways.id/assets/images/brandwhite.png" alt="Logo"></a>
+			</div>
+			<ul class="nav-links nav-left">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+			<ul class="nav-links nav-right">
+				<li><a href="contact.html">Contact Me</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<div class="container">
+			<div class="box">
+				<div class="info">
+					<h1>Hi, Welcome to My Web</h1>
+					<p>A passionate Full Stack Developer with experience in building responsive and user-friendly web
+						applications.
+						My job and hobby is creating computer programs, everything related to information technology, electronics,
+						mathematics and computer science, I have created several projects related to web development ranging from
+						Front End, Back End to Database ( DBMS), the languages ​​and libraries that I use are JavaScript, ReactJs,
+						React Native for mobile Apps, ExpressJS, Go and MySQL.
+					</p>
+					<div class="contact-download">
+						<a href="contact.html" class="contact-btn">Contact</a>
+						<a href="https://drive.google.com/file/d/11xQGHk2TU9oRhSyYENC8nDVS_b6e8m9N/view?usp=sharing" class="cv-btn"
+							download>Download CV</a>
+					</div>
+					<div class="social-media">
+						<a href="https://www.linkedin.com/in/irham-rahmat-saleh-a03153169/" target="_blank">
+							<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+						</a>
+						<a href="https://www.instagram.com/irhamsaleh904/?hl=en" target="_blank">
+							<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+						</a>
+						<a href="https://web.facebook.com/Irham.s4leh" target="_blank">
+							<img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook">
+						</a>
+						<a href="https://x.com/RichIrham" target="_blank">
+							<img src="https://cdn-icons-png.flaticon.com/512/145/145812.png" alt="Twitter">
+						</a>
+						<a href="https://github.com/Irhamrahmatsaleh" target="_blank">
+							<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+						</a>
+
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<div class="photo-box">
+							<img
+								src="https://scontent.fcgk4-5.fna.fbcdn.net/v/t39.30808-6/435300569_1101854034378925_7965224793727079952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHb4mHG3vMn8S9RNRU_Zd84jeTI4VswWOGN5MjhWzBY4YhjCbiXGcuS7wv2gJkzk2y7zoR4tONRV62AEUAwAnJI&_nc_ohc=LBwiCsVBsIkQ7kNvgE6xRGx&_nc_zt=23&_nc_ht=scontent.fcgk4-5.fna&oh=00_AYDANcSeLIjc-SVUtFdBeuR4pzofjWGW-AAJd0TtigqZLA&oe=66D26166"
+								alt="Profile Picture" class="profile-img">
+						</div>
+						<p>Irham Rahmat Saleh</p>
+					</div>
+					<div class="card-body">
+						<p>Full Stack Developer</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
+
 </html>
