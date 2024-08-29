@@ -1,194 +1,216 @@
 		body {
-		  font-family: Arial, sans-serif;
-		  background-color: #f4f4f4;
-		  margin: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			margin: 0;
 		}
 
 		header {
-		  background-color: #fe4e30;
-		  padding: 15px 0;
+			background-color: #fe4e30;
+			padding: 15px 0;
 		}
 
 		.navbar {
-		  display: flex;
-		  justify-content: space-between;
-		  align-items: center;
-		  padding: 0 20px;
-		  color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 20px;
+			color: #fff;
 		}
 
 		.navbar .logo img {
-		  height: 30px;
-		  margin-right: 20px;
+			height: 30px;
+			margin-right: 20px;
 		}
 
 		.nav-links {
-		  list-style: none;
-		  margin: 0;
-		  padding: 0;
-		  display: flex;
-		  flex: 1;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex: 1;
 		}
 
 		.nav-left {
-		  display: flex;
-		  flex: 1;
-		  justify-content: flex-start;
+			display: flex;
+			flex: 1;
+			justify-content: flex-start;
 		}
 
 		.nav-right {
-		  display: flex;
-		  justify-content: flex-end;
+			display: flex;
+			justify-content: flex-end;
 		}
 
 		.nav-links li {
-		  margin-left: 20px;
+			margin-left: 20px;
 		}
 
 		.nav-links a {
-		  color: #fff;
-		  text-decoration: none;
-		  font-weight: bold;
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
 		}
 
 		.nav-links a:hover {
-		  text-decoration: underline;
+			text-decoration: underline;
 		}
 
 		.container {
-		  display: flex;
-		  justify-content: center;
-		  padding: 20px;
+			display: flex;
+			justify-content: center;
+			padding: 20px;
 		}
 
 		.box {
-		  display: flex;
-		  flex-direction: row;
-		  align-items: center;
-		  background: #fff;
-		  border-radius: 8px;
-		  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		  padding: 20px;
-		  max-width: 900px;
-		  width: 100%;
-		  box-sizing: border-box;
-		  margin-top: 30px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			background: #fff;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			max-width: 900px;
+			width: 100%;
+			box-sizing: border-box;
+			margin-top: 30px;
 		}
 
 		.info {
-		  flex: 1;
-		  padding-right: 20px;
+			flex: 1;
+			padding-right: 20px;
 		}
 
 		.info h1 {
-		  margin: 0;
-		  font-size: 28px;
-		  color: #333;
+			margin: 0;
+			font-size: 28px;
+			color: #333;
 		}
 
 		.info p {
-		  margin: 10px 0;
-		  color: #777;
+			margin: 10px 0;
+			color: #777;
 		}
 
 		.description {
-		  margin: 10px 0;
-		  color: #555;
-		  font-style: italic;
+			margin: 10px 0;
+			color: #555;
+			font-style: italic;
 		}
 
 		.contact-download {
-		  margin: 20px 0;
+			margin: 20px 0;
 		}
 
 		.contact-btn,
 		.cv-btn {
-		  background-color: #fe4e30;
-		  color: white;
-		  padding: 10px 20px;
-		  border: none;
-		  border-radius: 5px;
-		  cursor: pointer;
-		  text-decoration: none;
-		  display: inline-block;
-		  margin: 5px;
+			background-color: #fe4e30;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			text-decoration: none;
+			display: inline-block;
+			margin: 5px;
 		}
 
 		.contact-btn:hover,
 		.cv-btn:hover {
-		  background-color: #ad270f;
+			background-color: #ad270f;
 		}
 
 		.social-media {
-		  margin-top: 10px;
+			margin-top: 10px;
 		}
 
 		.social-media a {
-		  text-decoration: none;
-		  /* Menghilangkan garis bawah */
+			text-decoration: none;
+			/* Menghilangkan garis bawah */
 		}
 
 		.social-media a img {
-		  width: 30px;
-		  margin: 0 10px;
-		  transition: transform 0.3s ease;
+			width: 30px;
+			margin: 0 10px;
+			transition: transform 0.3s ease;
 		}
 
 		.social-media a img:hover {
-		  transform: scale(1.2);
+			transform: scale(1.2);
 		}
 
 		.card {
-		  background: #fff;
-		  border-radius: 8px;
-		  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		  border: 2px solid #fe4e30;
-		  width: 300px;
-		  padding: 20px;
-		  text-align: center;
+			background: #fff;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			border: 2px solid #fe4e30;
+			width: 300px;
+			padding: 20px;
+			text-align: center;
 		}
 
 		.card-header {
-		  margin-bottom: 20px;
+			margin-bottom: 20px;
 		}
 
 		.photo-box {
-		  width: 150px;
-		  height: 150px;
-		  margin: 0 auto;
-		  overflow: hidden;
-		  border-radius: 8px;
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+			overflow: hidden;
+			border-radius: 8px;
 		}
 
 		.profile-img {
-		  width: 100%;
-		  height: auto;
-		  object-fit: cover;
+			width: 100%;
+			height: auto;
+			object-fit: cover;
 		}
 
 		.card-body {
-		  font-weight: bold;
-		  color: #555;
+			font-weight: bold;
+			color: #555;
 		}
 
 		.card-body p {
-		  margin: 10px 0 0;
+			margin: 10px 0 0;
+		}
+
+
+		@media (max-width: 768px) {
+			.box {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.info {
+				max-width: 100%;
+				text-align: center;
+				padding-right: 0;
+			}
+
+			.card {
+				margin-top: 20px;
+
+			}
+		}
+
+		footer {
+			background: linear-gradient(180deg, #fe4e30, #df266f 91.76%);
+			color: white;
+			text-align: center;
+			padding: 1em 0;
+			position: relative;
+			/* Ubah dari absolute menjadi relative */
+			width: 100%;
+			margin-top: 170px;
+			/* Tambahkan margin-top untuk memberi jarak */
+			box-sizing: border-box;
+			/* Pastikan padding di dalam lebar */
 		}
 
 		@media (max-width: 768px) {
-		  .box {
-		    flex-direction: column;
-		    align-items: center;
-		  }
-
-		  .info {
-		    max-width: 100%;
-		    text-align: center;
-		    padding-right: 0;
-		  }
-
-		  .card {
-		    margin-top: 20px;
-
-		  }
+			footer {
+				position: relative;
+				/* Pastikan tetap relatif pada layar kecil */
+			}
 		}

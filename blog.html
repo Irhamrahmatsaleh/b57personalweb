@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Irham Rahmat Saleh</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/blogStyle.css">
+  <link rel="stylesheet" href="assets/css/contactStyle.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="logo">
+          <a href="#"><img src="https://dumbways.id/assets/images/brandwhite.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <ul class="nav-links">
+        <li><a href="contact.html">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="blog">
+      <div class="blog-form">
+        <div class="form-container">
+          <form id="blogForm" onsubmit="addOrUpdateBlog(event)">
+            <h1 id="form-title">Create Post Blog</h1>
+            <input type="hidden" id="input-blog-id" />
+            <div>
+              <label for="input-blog-title">Title</label>
+              <input id="input-blog-title" type="text" />
+            </div>
+            <div>
+              <label for="input-blog-content">Content</label>
+              <textarea id="input-blog-content"></textarea>
+            </div>
+            <div>
+              <label for="blog-category">Category</label>
+              <div id="blog-category" class="checkbox-container">
+                <label><input type="checkbox" value="Blockchain & Crypto"> Blockchain</label>
+                <label><input type="checkbox" value="Web Development"> Web</label>
+                <label><input type="checkbox" value="Tech Career Tips"> Tech Career</label>
+                <label><input type="checkbox" value="Mental Health & Productivity"> Mental Health</label>
+                <label><input type="checkbox" value="Programming Tutorials"> Programming</label>
+                <label><input type="checkbox" value="Other"> Other</label>
+              </div>
+            </div>
+            <div>
+              <label>Upload Image</label>
+              <div class="input-blog-image-group">
+                <label for="input-blog-image">
+                  <p>Attach File</p>
+                  <i class="fa-solid fa-paperclip"></i>
+                </label>
+                <input type="file" id="input-blog-image" hidden />
+              </div>
+            </div>
+            <div class="button-group">
+              <button type="submit">Post Blog</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <hr class="line" />
+      <div id="contents" class="blog-list">
+        <!-- dynamic content will be here -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p id="current-date"></p>
+    <p>&copy; <span id="current-year"></span> Irham Rahmat Saleh</p>
+  </footer>
+
+  <script src="assets/js/blog.js"></script>
+</body>
+
+</html>

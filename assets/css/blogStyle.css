@@ -1,0 +1,159 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Blog Form Styles */
+.blog-form {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-container label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-container input[type="text"],
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container textarea {
+  resize: vertical;
+  height: 150px;
+}
+
+.input-blog-image-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.input-blog-image-group p {
+  margin: 0;
+  font-weight: bold;
+  color: #fe4e30;
+}
+
+.input-blog-image-group i {
+  font-size: 1.5rem;
+  color: #fe4e30;
+}
+
+.form-container .button-group {
+  text-align: center;
+}
+
+.form-container .button-group button {
+  background-color: #fe4e30;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.form-container .button-group button:hover {
+  background-color: #d33a20;
+}
+
+/* Blog List Styles */
+.blog-list-item {
+  background-color: #fe4e30;
+  color: white;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blog-list-item .blog-image img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.blog-list-item .blog-content {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.blog-list-item .btn-group {
+  margin-bottom: 10px;
+}
+
+.blog-list-item .btn-group button {
+  background-color: #555;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.blog-list-item .btn-group button:hover {
+  background-color: #333;
+}
+
+/* Footer Styles */
+/* Footer Styles */
+footer {
+  background: linear-gradient(180deg, #fe4e30, #df266f 91.76%);
+  color: #fff;
+  text-align: center;
+  padding: 1rem 2rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+#current-date {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+#current-year {
+  font-weight: bold;
+}
