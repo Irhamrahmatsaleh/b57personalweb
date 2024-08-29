@@ -201,11 +201,7 @@
 			padding: 1em 0;
 			position: relative;
 			/* Ubah dari absolute menjadi relative */
-			width: 100%;
-			margin-top: 170px;
-			/* Tambahkan margin-top untuk memberi jarak */
-			box-sizing: border-box;
-			/* Pastikan padding di dalam lebar */
+			width: auto;
 		}
 
 		@media (max-width: 768px) {

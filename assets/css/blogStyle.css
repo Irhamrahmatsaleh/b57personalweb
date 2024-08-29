@@ -103,6 +103,40 @@ h1 {
   margin-bottom: 8px;
 }
 
+/*kkkk*/
+.input-blog-image-group {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 2px dashed #fe4e30;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.input-blog-image-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+  width: 100%;
+  /* Pastikan label menggunakan seluruh lebar elemen */
+}
+
+.input-blog-image-label span {
+  margin: 0;
+  font-weight: bold;
+  color: #fe4e30;
+}
+
+.input-blog-image-label i {
+  font-size: 1.5rem;
+  color: #fe4e30;
+  margin-left: 5px;
+}
+
+/*kkkk*/
+
 /* Blog List Styles */
 .blog-list {
   display: flex;

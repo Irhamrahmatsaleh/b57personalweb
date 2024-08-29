@@ -65,7 +65,7 @@ function renderBlog() {
         <p><strong>Categories:</strong> ${blog.categories}</p>
         <p><strong>Posted on:</strong> ${blog.createdAt}</p>
         <div class="btn-group">
-          <button>View</button>
+          <button onclick="window.location.href='blogDetail.html?id=${blog.id}'">View</button>
           <button onclick="editBlog(${blog.id})">Edit</button>
           <button
                   id="deleteButton"
@@ -79,6 +79,30 @@ function renderBlog() {
 
     contents.appendChild(blogItem);
   });
+}
+
+function editBlog(id) {
+  const blog = blogs.find(blog => blog.id === id);
+  if (blog) {
+    document.getElementById("input-blog-id").value = blog.id;
+    document.getElementById("input-blog-title").value = blog.title;
+    document.getElementById("input-blog-content").value = blog.content;
+    // Check the corresponding categories
+    document.querySelectorAll("#blog-category input[type='checkbox']").forEach(cb => {
+      cb.checked = blog.categories.includes(cb.value);
+    });
+    document.getElementById("form-title").innerText = "Edit Post Blog";
+    window.scrollTo(0, 0); // Scroll to top for better UX
+  }
+}
+
+function deleteBlog(id) {
+  const blogIndex = blogs.findIndex(blog => blog.id === id);
+  if (blogIndex !== -1) {
+    blogs.splice(blogIndex, 1);
+    localStorage.setItem("blogs", JSON.stringify(blogs));
+    renderBlog(); // Re-render the blog list without the deleted item
+  }
 }
 
 renderBlog();
