@@ -65,13 +65,13 @@ function renderBlog() {
         <p><strong>Categories:</strong> ${blog.categories}</p>
         <p><strong>Posted on:</strong> ${blog.createdAt}</p>
         <div class="btn-group">
+          <button>View</button>
           <button onclick="editBlog(${blog.id})">Edit</button>
-          <!--<button style="background: #bb2124;" onclick="deleteBlog(${blog.id})">Delete</button>-->
           <button
                   id="deleteButton"
                   style="background: #bb2124; color: white; cursor: pointer;"
                   onclick="deleteBlog(${blog.id})"
-                  onmouseover="this.style.background='#df266f'"
+                  onmouseover="this.style.background='#6e1404'"
                   onmouseout="this.style.background='#bb2124'">Delete</button>
         </div>
       </div>
