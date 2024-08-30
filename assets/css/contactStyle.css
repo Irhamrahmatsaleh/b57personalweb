@@ -110,3 +110,32 @@
     .form-group input[type="submit"]:hover {
       background-color: #ad270f;
     }
+
+    footer {
+      background-color: #333;
+      /* Warna latar belakang footer */
+      color: #fff;
+      /* Warna teks footer */
+      text-align: center;
+      /* Posisi teks berada di tengah */
+      padding: 20px;
+      /* Jarak di dalam footer */
+      font-size: 14px;
+      /* Ukuran font */
+      position: fixed;
+      /* Posisi tetap di bagian bawah */
+      bottom: 0;
+      /* Jarak dari bawah */
+      width: 100%;
+      /* Lebar footer sesuai dengan lebar layar */
+    }
+
+    footer p {
+      margin: 0;
+      /* Menghilangkan margin default pada paragraf */
+    }
+
+    footer span#current-year {
+      font-weight: bold;
+      /* Membuat tahun tebal */
+    }

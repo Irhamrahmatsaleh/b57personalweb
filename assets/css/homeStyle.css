@@ -194,19 +194,11 @@
 			}
 		}
 
-		footer {
+		/* footer {
 			background: linear-gradient(180deg, #fe4e30, #df266f 91.76%);
 			color: white;
 			text-align: center;
 			padding: 1em 0;
 			position: relative;
-			/* Ubah dari absolute menjadi relative */
 			width: auto;
-		}
-
-		@media (max-width: 768px) {
-			footer {
-				position: relative;
-				/* Pastikan tetap relatif pada layar kecil */
-			}
-		}
+		} */

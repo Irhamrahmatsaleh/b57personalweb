@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADD MY PROJECT</title>
+  <link rel="stylesheet" href="assets/css/projectStyle.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+
+
+<div class="container">
+  <h1 class="title">ADD MY PROJECT</h1>
+
+  <form id="project-form">
+    <div class="form-group">
+      <label for="project-name">Project Name</label>
+      <input type="text" id="project-name" name="project-name" required>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group">
+        <label for="start-date">Start Date</label>
+        <input type="date" id="start-date" name="start-date" required>
+      </div>
+      <div class="form-group">
+        <label for="end-date">End Date</label>
+        <input type="date" id="end-date" name="end-date" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="technologies">Technologies</label>
+      <div class="checkbox-group">
+        <div>
+          <input type="checkbox" id="nodejs" name="technologies" value="Node JS">
+          <label for="nodejs">Node JS</label>
+        </div>
+        <div>
+          <input type="checkbox" id="reactjs" name="technologies" value="React JS">
+          <label for="reactjs">React JS</label>
+        </div>
+        <div>
+          <input type="checkbox" id="nextjs" name="technologies" value="Next JS">
+          <label for="nextjs">Next JS</label>
+        </div>
+        <div>
+          <input type="checkbox" id="typescript" name="technologies" value="TypeScript">
+          <label for="typescript">TypeScript</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="upload-image">Upload Image</label>
+      <div class="file-input-container">
+        <input type="file" id="upload-image" name="upload-image" required>
+        <label for="upload-image" class="file-input-label"><i class="fas fa-paperclip"></i></label>
+      </div>
+    </div>
+
+    <div class="form-group submit-btn-container">
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+  </form>
+
+  <h2 class="title" style="margin-top: 50px;">MY PROJECT</h2>
+
+  <div class="card-container">
+    <div class="card">
+      <img src="project-image.jpg" alt="Project Image">
+      <h3>Project Title</h3>
+      <p>Duration: Jan 2023 - Mar 2023</p>
+      <p>Short description of the project...</p>
+      <div class="card-icons">
+        <i class="fab fa-google-play"></i>
+        <i class="fab fa-android"></i>
+        <i class="fab fa-java"></i>
+      </div>
+      <div class="card-buttons">
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
+      </div>
+    </div>
+    <!-- Duplicate the card as needed for other projects -->
+  </div>
+</div>
+</body>
+
+</html>
