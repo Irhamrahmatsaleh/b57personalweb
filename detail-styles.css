@@ -33,6 +33,7 @@ h1 {
 .image-and-info {
   display: flex;
   align-items: flex-start;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
