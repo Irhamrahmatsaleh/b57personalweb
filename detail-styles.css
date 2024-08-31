@@ -1,0 +1,116 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+}
+
+/* header {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  margin-bottom: 20px;
+} */
+
+h1 {
+  margin: 0;
+}
+
+/* Project Detail Main Content */
+.project-detail {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Image and Duration Info Section */
+.image-and-info {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.image-and-info img {
+  max-width: 350px;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+.info-section {
+  flex-grow: 1;
+}
+
+.duration-info {
+  margin-bottom: 20px;
+}
+
+.duration-info p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.date-range,
+.time-duration {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.date-range i,
+.time-duration i {
+  margin-right: 8px;
+  color: #555;
+}
+
+/* Technologies Section */
+.technologies {
+  margin-bottom: 20px;
+}
+
+.technologies h2 {
+  margin-bottom: 10px;
+}
+
+.technologies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.technologies li {
+  display: inline-block;
+  background-color: #e9ecef;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 4px;
+}
+
+/* Description Section */
+.description h2 {
+  margin-bottom: 10px;
+}
+
+.description p {
+  line-height: 1.6;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .image-and-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-and-info img {
+    margin-bottom: 20px;
+  }
+
+  .info-section {
+    text-align: center;
+  }
+}

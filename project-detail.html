@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Detail</title>
+  <link rel="stylesheet" href="detail-styles.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .header-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    #projectTitle {
+      margin: 0;
+    }
+
+    .projectTitle {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="logo">
+          <a href="#"><img src="https://dumbways.id/assets/images/brandwhite.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="myProject.html">My Project</a></li>
+        </ul>
+      </div>
+      <ul class="nav-links">
+        <li><a href="contact.html">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="header-container">
+    <h1 class="projectTitle">Project Detail</h1>
+  </div>
+
+  <!-- Main Content -->
+  <main class="project-detail">
+    <!-- Project Title -->
+    <div class="header-container">
+      <h1 id="projectTitle">Project Title</h1>
+    </div>
+
+    <div class="image-and-info">
+      <!-- Project Image -->
+      <img id="projectImage" src="https://via.placeholder.com/200" alt="Project Image">
+
+      <div class="info-section">
+        <div class="duration-info">
+          <!-- Project Duration -->
+          <p id="projectDuration">Duration: 1 month</p>
+
+          <!-- Date Range -->
+          <div class="date-range">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="dateRange">12 Jan 2021 - 11 Feb 2021</span>
+          </div>
+
+          <!-- Duration in Months -->
+          <div class="time-duration">
+            <i class="fas fa-clock"></i>
+            <span id="timeDuration">1 month</span>
+          </div>
+        </div>
+
+        <!-- Technologies Used -->
+        <section class="technologies">
+          <h2>Technologies Used</h2>
+          <ul id="techList">
+            <!-- Example Technologies -->
+            <li>Node.js</li>
+            <li>React.js</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <!-- Project Description -->
+    <section class="description">
+      <h2>Description</h2>
+      <p id="projectDescription">
+        This is where the project description will go. It will contain all the detailed information about the project
+        that the user has inputted.
+      </p>
+    </section>
+  </main>
+  <script src="project-detail.js"></script>
+</body>
+
+</html>
