@@ -45,6 +45,7 @@ h1 {
 
 .info-section {
   flex-grow: 1;
+  margin-left: 10px;
 }
 
 .duration-info {
