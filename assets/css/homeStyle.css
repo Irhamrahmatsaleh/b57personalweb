@@ -4,7 +4,7 @@
 			margin: 0;
 		}
 
-		header {
+		/* header {
 			background-color: #fe4e30;
 			padding: 15px 0;
 		}
@@ -53,7 +53,7 @@
 
 		.nav-links a:hover {
 			text-decoration: underline;
-		}
+		} */
 
 		.container {
 			display: flex;
