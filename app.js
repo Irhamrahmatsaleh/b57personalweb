@@ -12,7 +12,7 @@ function saveProjectsToLocalStorage(projects) {
 // Fungsi untuk menambahkan proyek baru
 function addProject(project) {
   const projects = getProjectsFromLocalStorage();
-  projects.push(project);
+  projects.unshift(project);
   saveProjectsToLocalStorage(projects);
   displayProjects(); // Tampilkan ulang proyek setelah ditambah
 }
