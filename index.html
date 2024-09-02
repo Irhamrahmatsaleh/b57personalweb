@@ -6,9 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Irham Rahmat Saleh - Full Stack Developer</title>
 	<link rel="stylesheet" href="assets/css/homeStyle.css">
-	<link rel="stylesheet" href="assets/css/contactStyle.css">
+	<link rel="stylesheet" href="assets/css/navbar.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<!-- style for table ul li -->
-	<style>
+	<!-- <style>
 		.card-body {
 			text-align: center;
 		}
@@ -30,7 +31,7 @@
 			background-color: #f2f2f2;
 			font-weight: bold;
 		}
-	</style>
+	</style> -->
 </head>
 
 <body>
@@ -40,16 +41,19 @@
 				<div class="logo">
 					<a href="#"><img src="https://dumbways.id/assets/images/brandwhite.png" alt="Logo"></a>
 				</div>
-				<ul class="nav-links">
+				<ul class="nav-links" id="nav-menu">
 					<li><a href="index.html">Home</a></li>
 					<li><a href="myProject.html">My Project</a></li>
+					<li><a href="contact.html">Contact Me</a></li>
 				</ul>
 			</div>
-			<ul class="nav-links">
-				<li><a href="contact.html">Contact Me</a></li>
-			</ul>
+			<div class="burger" id="burger">
+				<i class="fas fa-bars"></i>
+			</div>
 		</nav>
 	</header>
+
+
 	<main>
 		<div class="container">
 			<div class="box">
@@ -57,10 +61,10 @@
 					<h1>Hi, Welcome to My Web</h1>
 					<p>A passionate Full Stack Developer with experience in building responsive and user-friendly web
 						applications.
-						My job and hobby is creating computer programs, everything related to information technology, electronics,
-						mathematics and computer science, I have created several projects related to web development ranging from
+						My job and hobby is creating computer programs, everything related to information technology,
+						electronics,mathematics and computer science.<!-- I have created several projects related to web development ranging from
 						Front End, Back End to Database ( DBMS), the languages ​​and libraries that I use are JavaScript, ReactJs,
-						React Native for mobile Apps, ExpressJS, Go and MySQL.
+						React Native for mobile Apps, ExpressJS, Go and MySQL. -->
 					</p>
 					<div class="contact-download">
 						<a href="contact.html" class="contact-btn">Contact</a>
@@ -90,13 +94,13 @@
 						<div class="photo-box">
 							<img src="assets/img/irham-jas.jpg" alt="Profile Picture" class="profile-img">
 						</div>
-						<p>Irham Rahmat Saleh</p>
-						<p style="color: #fe4e30;">I will become a great software engineer, one day!</p>
+						<p style="font-size: 20px; font-weight: bold;">Irham Rahmat Saleh</p>
+						<p class="card-body">Full Stack Developer</p>
+						<!-- <p style="color: #fe4e30;">I will become a great software engineer, one day!</p> -->
 					</div>
 					<div class="card-body">
-						<p>Full Stack Developer</p>
 
-						<table class="experience-table">
+						<!-- <table class="experience-table">
 							<tr>
 								<th>Experience</th>
 								<th>Year</th>
@@ -105,7 +109,7 @@
 								<td>Develop Personal Website</td>
 								<td>2024</td>
 							</tr>
-						</table>
+						</table> -->
 					</div>
 				</div>
 			</div>
@@ -115,7 +119,7 @@
 	<!-- <footer>
 		<p>&copy; <span id="current-year"></span> Irham Rahmat Saleh</p>
 	</footer> -->
-
+	<script src="assets/js/navbar.js"></script>
 	<script src="assets/js/footer.js"></script>
 </body>
 
