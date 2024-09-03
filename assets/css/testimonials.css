@@ -1,0 +1,68 @@
+/* Reset dan base styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  /* Tambahkan style untuk navbar di sini */
+}
+
+.testimonials-section {
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.testimonials-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.testimonial {
+  background: #fff;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 4px 8px rgba(69, 4, 4, 0.282);
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 300px;
+}
+
+.profile-testimonial {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.quote {
+  font-size: 1.2em;
+  margin: 15px 0;
+  color: #333;
+}
+
+.author {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #f39c12;
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+  .testimonial {
+    max-width: 100%;
+  }
+}

@@ -57,7 +57,7 @@ header {
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: transparent;
+    background-color: white;
     /* Menjadikan background transparent */
     position: absolute;
     top: 60px;

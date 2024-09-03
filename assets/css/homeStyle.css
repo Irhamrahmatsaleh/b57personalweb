@@ -133,13 +133,13 @@
 
 			.info {
 				max-width: 100%;
-				text-align: left;
+				text-align: center;
 				padding-right: 0;
 			}
 
 			.card {
 				margin-top: 20px;
-				width: 200px;
+				width: 250px;
 
 			}
 		}
