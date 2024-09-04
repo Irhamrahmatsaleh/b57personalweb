@@ -32,12 +32,20 @@
   <main>
     <section class="testimonials-section">
       <h1>My Testimonials</h1>
+      <div id="filter-stars" class="filter-stars">
+        <button onclick="filterTestimonials('all')">All Stars</button>
+        <button onclick="filterTestimonials(1)"><i class="fas fa-star"></i> 1 Star</button>
+        <button onclick="filterTestimonials(2)"><i class="fas fa-star"></i> 2 Stars</button>
+        <button onclick="filterTestimonials(3)"><i class="fas fa-star"></i> 3 Stars</button>
+        <button onclick="filterTestimonials(4)"><i class="fas fa-star"></i> 4 Stars</button>
+        <button onclick="filterTestimonials(5)"><i class="fas fa-star"></i> 5 Stars</button>
+      </div>
       <div id="testimonials" class="testimonials-container">
         <!-- Testimonial cards akan diisi oleh JavaScript -->
       </div>
     </section>
   </main>
-  <script src="assets/js/testimonials.js"></script>
+  <script src="assets/js/testimonials-new.js"></script>
   <script src="assets/js/navbar.js"></script>
 </body>
 
