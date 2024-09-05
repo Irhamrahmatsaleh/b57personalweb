@@ -1,13 +1,24 @@
-
-let xhr = new XMLHttpRequest();
-xhr.open("GET", "https://api.npoint.io/456f10355d616c72db01", true);
-xhr.onreadystatechange = function () {
-  if (xhr.readyState == 4 && xhr.status == 200) {
-    let data = JSON.parse(xhr.responseText);
+// Fetch data using Fetch API
+fetch("https://api.npoint.io/456f10355d616c72db01")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
     displayTestimonials(data);
-  }
-};
-xhr.send();
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });
+// .then(data => {
+//   // Tampilkan data di console
+//   console.log(data);
+// })
+// .catch(error => {
+//   console.error('There has been a problem with your fetch operation:', error);
+// });
 
 function displayTestimonials(testimonials) {
   let testimonialsContainer = document.getElementById('testimonials');
@@ -42,11 +53,14 @@ function displayTestimonials(testimonials) {
 
 // Function to filter testimonials based on star rating
 function filterTestimonials(starRating) {
-  let xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://api.npoint.io/456f10355d616c72db01", true);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let data = JSON.parse(xhr.responseText);
+  fetch("https://api.npoint.io/456f10355d616c72db01")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
       if (starRating === 'all') {
         displayTestimonials(data);
       } else {
@@ -55,7 +69,8 @@ function filterTestimonials(starRating) {
         });
         displayTestimonials(filteredData);
       }
-    }
-  };
-  xhr.send();
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
 }
