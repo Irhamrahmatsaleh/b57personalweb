@@ -55,6 +55,12 @@ h1 {
   flex: 1 1 300px;
 }
 
+/* .profile-testimonial {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+} */
 .profile-testimonial {
   width: 100%;
   height: auto;
