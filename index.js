@@ -1,4 +1,4 @@
-// Fungsi untuk memuat dan menampilkan proyek dari localStorage
+
 function loadProjects() {
   const projects = JSON.parse(localStorage.getItem('projects')) || [];
   const projectContainer = document.querySelector('.project-section .row');
@@ -9,13 +9,18 @@ function loadProjects() {
     const card = document.createElement('div');
     card.classList.add('card', 'col-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'm-2', 'p-0', 'shadow-sm');
 
+    // Batasi deskripsi yang ditampilkan hanya 100 karakter
+    const shortDescription = project.description.length > 100
+      ? project.description.substring(0, 100) + '...'
+      : project.description;
+
     card.innerHTML = `
       <img src="${project.imageUrl}" class="card-img-top" alt="Project Image">
       <div class="card-body">
         <h2 class="card-title h5">${project.projectName}</h2>
         <p class="card-text">${new Date(project.startDate).getFullYear()}</p>
         <p class="card-text">Duration: ${getProjectDuration(project.startDate, project.endDate)}</p>
-        <p class="card-text">${project.description}</p>
+        <p class="card-text">${shortDescription}</p> <!-- Tampilkan deskripsi pendek -->
         <div class="icons mb-3">
           ${project.technologies.map(tech => `<i class="fab fa-${tech.toLowerCase()} mx-1"></i>`).join('')}
         </div>
