@@ -1,0 +1,141 @@
+body {
+  padding-top: 70px;
+}
+
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/*  */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  /* Hilangkan garis bawah default */
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  /* Warna garis bawah */
+  transition: width 0.3s ease;
+  /* Animasi garis bawah */
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  /* Lebar garis bawah saat hover */
+}
+
+#projectTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #343a40;
+}
+
+.image-and-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+#projectImage {
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+  flex-grow: 1;
+}
+
+.duration-info p {
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.date-range,
+.time-duration {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.date-range i,
+.time-duration i {
+  margin-right: 8px;
+  color: #17a2b8;
+}
+
+.technologies {
+  margin-top: 20px;
+}
+
+.technologies h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 15px;
+}
+
+.technologies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.technologies li {
+  display: inline-block;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 5px;
+  font-size: 1rem;
+  color: #495057;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.description p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #495057;
+}
+
+@media (max-width: 768px) {
+  .image-and-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-section {
+    text-align: center;
+  }
+
+  .date-range,
+  .time-duration {
+    justify-content: center;
+  }
+}

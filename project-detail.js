@@ -1,51 +1,65 @@
 
-function getProjectById(id) {
-  const projects = JSON.parse(localStorage.getItem('projects')) || [];
-  return projects.find(project => project.id === id);
+// Fungsi untuk mendapatkan nilai parameter query dari URL
+function getQueryParameter(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
 }
 
-// Fungsi untuk menampilkan detail proyek di halaman project-detail.html
-function displayProjectDetail() {
-  const projectId = localStorage.getItem('currentProjectId');
-  const project = getProjectById(projectId);
+// Fungsi untuk memuat detail proyek berdasarkan ID dari localStorage
+function loadProjectDetails() {
+  const projectId = getQueryParameter('id');
 
-  if (project) {
-    document.getElementById('projectTitle').textContent = project.name;
-    document.getElementById('projectImage').src = project.image || 'https://via.placeholder.com/200';
-    document.getElementById('projectDuration').textContent = `Duration`;
-    // ${Math.round((new Date(project.endDate) - new Date(project.startDate)) / (1000 * 60 * 60 * 24 * 30))} month${Math.round((new Date(project.endDate) - new Date(project.startDate)) / (1000 * 60 * 60 * 24 * 30)) > 1 ? 's' : ''}`;
-
-    // Format tanggal "31 Aug 2024"
-    const formatDate = date => new Date(date).toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    });
-
-    document.getElementById('dateRange').textContent = `${formatDate(project.startDate)} - ${formatDate(project.endDate)}`;
-    document.getElementById('timeDuration').textContent = `${Math.round((new Date(project.endDate) - new Date(project.startDate)) / (1000 * 60 * 60 * 24 * 30))} month${Math.round((new Date(project.endDate) - new Date(project.startDate)) / (1000 * 60 * 60 * 24 * 30)) > 1 ? 's' : ''}`;
-    document.getElementById('projectDescription').textContent = project.description;
-
-    const techList = document.getElementById('techList');
-    techList.innerHTML = '';
-    project.technologies.forEach(tech => {
-      const li = document.createElement('li');
-      li.textContent = tech;
-      techList.appendChild(li);
-    });
-
-    // Tombol edit
-    document.getElementById('editProjectBtn').addEventListener('click', () => {
-      localStorage.setItem('editingProjectId', project.id);
-      window.location.href = 'edit-project.html';
-    });
-  } else {
-    // Jika proyek tidak ditemukan, arahkan kembali ke halaman utama
-    window.location.href = 'index.html';
+  if (!projectId) {
+    console.error('No project ID found in URL');
+    return;
   }
+
+  // Ambil data proyek dari localStorage
+  const projects = JSON.parse(localStorage.getItem('projects')) || [];
+  const project = projects.find(proj => proj.id === parseInt(projectId));
+
+  if (!project) {
+    console.error('Project not found');
+    return;
+  }
+
+  // Isi elemen di halaman dengan detail proyek
+  document.getElementById('projectTitle').textContent = project.projectName;
+  document.getElementById('projectImage').src = project.imageUrl;
+
+  // Format tanggal menjadi "9 Sep 2024 - 6 Nov 2024"
+  const formattedStartDate = new Date(project.startDate).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+  const formattedEndDate = new Date(project.endDate).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+
+  document.getElementById('dateRange').textContent = `${formattedStartDate} - ${formattedEndDate}`;
+  document.getElementById('timeDuration').textContent = getProjectDuration(project.startDate, project.endDate);
+  document.getElementById('projectDescription').textContent = project.description;
+
+  // Tampilkan teknologi yang digunakan
+  const techList = document.getElementById('techList');
+  techList.innerHTML = ''; // Bersihkan terlebih dahulu
+  project.technologies.forEach(tech => {
+    const li = document.createElement('li');
+    li.textContent = tech;
+    techList.appendChild(li);
+  });
 }
 
-// Tampilkan detail proyek saat halaman dimuat
-document.addEventListener('DOMContentLoaded', displayProjectDetail);
+// Fungsi untuk menghitung durasi proyek dalam bulan
+function getProjectDuration(startDate, endDate) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const duration = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 30)); // Durasi dalam bulan
+  return `${duration} months`;
+}
 
-//888888
+// Muat detail proyek ketika halaman dimuat
+document.addEventListener('DOMContentLoaded', loadProjectDetails);

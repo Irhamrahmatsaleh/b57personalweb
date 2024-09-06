@@ -1,0 +1,119 @@
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+
+    .navbar {
+      margin-bottom: 30px;
+    }
+
+    .nav-link {
+      position: relative;
+      text-decoration: none;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      /* Warna garis bawah */
+      transition: width 0.3s ease;
+      /* Animasi garis bawah */
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+      /* Lebar garis bawah saat hover */
+    }
+
+    /*  */
+
+    .form-section {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .form-section label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-section input,
+    .form-section textarea {
+      width: 100%;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    .form-section .date-inputs {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-section .date-inputs>div {
+      flex: 1;
+    }
+
+    .form-section .tech-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .form-section .tech-checkboxes>div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .form-section .file-upload {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-section .file-upload input {
+      flex: 1;
+    }
+
+    .form-section button {
+      width: 20%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+
+    @media (max-width: 767px) {
+      .form-section .date-inputs {
+        flex-direction: column;
+      }
+
+      .form-section .date-inputs>div {
+        margin-bottom: 10px;
+      }
+    }

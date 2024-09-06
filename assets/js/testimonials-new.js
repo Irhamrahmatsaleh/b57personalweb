@@ -1,58 +1,117 @@
-const testimonials = [
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL5m2gr2lMb1huhMFwIR41jrDU5ZOxKydgEw&s",
-    content: "Dattebayo",
-    author: "Naruto",
-    rating: 5,
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFo9nKGI6eDtfB7wVLiJ0voKBJJb5nrJj9Wg&s",
-    content: "Tch",
-    author: "Sasuke",
-    rating: 1,
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0MBAh1_8sj6rA6QhH31iBkhG2v7rLce4OSQ&s",
-    content: "Beban",
-    author: "Sakura",
-    rating: 3,
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0MBAh1_8sj6rA6QhH31iBkhG2v7rLce4OSQ&s",
-    content: "Beban",
-    author: "Sakura",
-    rating: 3,
-  },
-];
+// // Fungsi untuk mendapatkan nilai parameter query dari URL
+// function getQueryParameter(param) {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   return urlParams.get(param);
+// }
 
-function generateTestimonialsHTML(testimonialsArray) {
-  return testimonialsArray.map((testimonial) => {
-    return `<div class="testimonial">
-      <img src="${testimonial.image}" class="profile-testimonial" />
-      <p class="quote">"${testimonial.content}"</p>
-      <p class="author">- ${testimonial.author}</p>
-      <p class="author">${testimonial.rating} <i class="fa-solid fa-star"></i></p>
-    </div>`;
-  }).join('');
+// // Fungsi untuk memuat detail proyek berdasarkan ID dari localStorage
+// function loadProjectDetails() {
+//   const projectId = getQueryParameter('id');
+
+//   if (!projectId) {
+//     console.error('No project ID found in URL');
+//     return;
+//   }
+
+//   // Ambil data proyek dari localStorage
+//   const projects = JSON.parse(localStorage.getItem('projects')) || [];
+//   const project = projects.find(proj => proj.id === parseInt(projectId));
+
+//   if (!project) {
+//     console.error('Project not found');
+//     return;
+//   }
+
+//   // Isi elemen di halaman dengan detail proyek
+//   document.getElementById('projectTitle').textContent = project.projectName;
+//   document.getElementById('projectImage').src = project.imageUrl;
+//   document.getElementById('dateRange').textContent = `${new Date(project.startDate).toLocaleDateString()} - ${new Date(project.endDate).toLocaleDateString()}`;
+//   document.getElementById('timeDuration').textContent = getProjectDuration(project.startDate, project.endDate);
+//   document.getElementById('projectDescription').textContent = project.description;
+
+//   // Tampilkan teknologi yang digunakan
+//   const techList = document.getElementById('techList');
+//   techList.innerHTML = ''; // Bersihkan terlebih dahulu
+//   project.technologies.forEach(tech => {
+//     const li = document.createElement('li');
+//     li.textContent = tech;
+//     techList.appendChild(li);
+//   });
+// }
+
+// // Fungsi untuk menghitung durasi proyek dalam bulan
+// function getProjectDuration(startDate, endDate) {
+//   const start = new Date(startDate);
+//   const end = new Date(endDate);
+//   const duration = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 30)); // Durasi dalam bulan
+//   return `${duration} months`;
+// }
+
+// // Muat detail proyek ketika halaman dimuat
+// document.addEventListener('DOMContentLoaded', loadProjectDetails);
+
+
+// Fungsi untuk mendapatkan nilai parameter query dari URL
+function getQueryParameter(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
 }
 
-function displayTestimonials(filterCallback) {
-  const filteredTestimonials = filterCallback ? testimonials.filter(filterCallback) : testimonials;
-  const testimonialsHTML = generateTestimonialsHTML(filteredTestimonials);
-  document.getElementById("testimonials").innerHTML = testimonialsHTML;
-}
+// Fungsi untuk memuat detail proyek berdasarkan ID dari localStorage
+function loadProjectDetails() {
+  const projectId = getQueryParameter('id');
 
-function filterTestimonials(rating) {
-  if (rating === 'all') {
-    displayTestimonials();
-  } else {
-    displayTestimonials((testimonial) => testimonial.rating === rating);
+  if (!projectId) {
+    console.error('No project ID found in URL');
+    return;
   }
+
+  // Ambil data proyek dari localStorage
+  const projects = JSON.parse(localStorage.getItem('projects')) || [];
+  const project = projects.find(proj => proj.id === parseInt(projectId));
+
+  if (!project) {
+    console.error('Project not found');
+    return;
+  }
+
+  // Isi elemen di halaman dengan detail proyek
+  document.getElementById('projectTitle').textContent = project.projectName;
+  document.getElementById('projectImage').src = project.imageUrl;
+
+  // Format tanggal menjadi "9 Sep 2024 - 6 Nov 2024"
+  const formattedStartDate = new Date(project.startDate).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+  const formattedEndDate = new Date(project.endDate).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+
+  document.getElementById('dateRange').textContent = `${formattedStartDate} - ${formattedEndDate}`;
+  document.getElementById('timeDuration').textContent = getProjectDuration(project.startDate, project.endDate);
+  document.getElementById('projectDescription').textContent = project.description;
+
+  // Tampilkan teknologi yang digunakan
+  const techList = document.getElementById('techList');
+  techList.innerHTML = ''; // Bersihkan terlebih dahulu
+  project.technologies.forEach(tech => {
+    const li = document.createElement('li');
+    li.textContent = tech;
+    techList.appendChild(li);
+  });
 }
 
-// Inisialisasi semua testimonial saat halaman dimuat
-displayTestimonials();
+// Fungsi untuk menghitung durasi proyek dalam bulan
+function getProjectDuration(startDate, endDate) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const duration = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 30)); // Durasi dalam bulan
+  return `${duration} months`;
+}
+
+// Muat detail proyek ketika halaman dimuat
+document.addEventListener('DOMContentLoaded', loadProjectDetails);

@@ -12,13 +12,6 @@ fetch("https://api.npoint.io/456f10355d616c72db01")
   .catch(error => {
     console.error('There has been a problem with your fetch operation:', error);
   });
-// .then(data => {
-//   // Tampilkan data di console
-//   console.log(data);
-// })
-// .catch(error => {
-//   console.error('There has been a problem with your fetch operation:', error);
-// });
 
 function displayTestimonials(testimonials) {
   let testimonialsContainer = document.getElementById('testimonials');

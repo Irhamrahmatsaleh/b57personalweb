@@ -5,50 +5,122 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Me - Irham Rahmat Saleh</title>
-  <link rel="stylesheet" href="assets/css/contactStyle.css">
-  <link rel="stylesheet" href="assets/css/navbar.css">
-  <!-- <link rel="stylesheet" href="assets/css/blogStyle.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .nav-link {
+      position: relative;
+      text-decoration: none;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f7f7f7;
+    }
+
+    .contact-form {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .form-group label {
+      margin-bottom: 0.5rem;
+    }
+
+    #submit {
+      background-color: #28a745;
+      color: white;
+      width: 100%;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #28a745;
+    }
+
+    @media (max-width: 768px) {
+      .contact-container {
+        height: auto;
+        padding: 2rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="left-section">
-        <div class="logo">
-          <a href="#"><img src="https://dumbways.id/assets/images/brandwhite.png" alt="Logo"></a>
-        </div>
-        <ul class="nav-links" id="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="myProject.html">My Project</a></li>
-          <li><a href="testimonials.html">Testimonial</a></li>
-          <li><a href="contact.html">Contact Me</a></li>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-success fixed-top" style="padding: 0.2rem 1rem;">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand">
+        <img style="width: 50px; height: 50px; object-fit: contain"
+          src="https://dumbways.id/assets/images/brandwhite.png" class="navbar-logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold text-white" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold text-white" href="addProject.html">Add Project</a>
+          </li>
         </ul>
+        <a class="btn btn-dark bg-success" href="contact.html">Contact Me</a>
       </div>
-      <div class="burger" id="burger">
-        <i class="fas fa-bars"></i>
-      </div>
-    </nav>
-  </header><br><br>
-  <main>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main style="padding-top: 80px;">
     <div class="contact-container">
       <form class="contact-form" onsubmit="submitForm(event)">
         <h2>Contact Me</h2>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name">
+          <input type="text" class="form-control" id="name" name="name">
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email">
+          <input type="email" class="form-control" id="email" name="email">
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone">
+          <input type="tel" class="form-control" id="phone" name="phone">
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="subject">Subject</label>
-          <select id="subject" name="subject" class="custom-select">
+          <select id="subject" name="subject" class="form-select">
             <option value="">Select a subject</option>
             <option value="general_inquiry">General Inquiry</option>
             <option value="feedback">Feedback</option>
@@ -57,24 +129,25 @@
             <option value="other">Other</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="message">Message</label>
-          <textarea id="message" name="message"></textarea>
+          <textarea id="message" class="form-control" name="message" rows="5"></textarea>
         </div>
-        <div class="form-group">
-          <input id="submit" type="submit" value="Send Message">
+        <div class="form-group mb-3">
+          <input id="submit" class="btn btn-success" type="submit" value="Send Message">
         </div>
       </form>
     </div>
-  </main><br><br><br>
+  </main><br>
 
-  <!-- <footer>
-    <p>&copy; <span id="current-year"></span> Irham Rahmat Saleh</p>
-  </footer> -->
-
-  <script src="assets/js/contact.js"></script>
-  <script src="assets/js/navbar.js"></script>
-  <!-- <script src="assets/js/footer.js"></script> -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="contact.js"></script>
 </body>
 
 </html>
