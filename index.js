@@ -43,9 +43,9 @@ function loadProjects() {
     <div class="d-flex justify-content-between align-items-center">
       <!-- Ikon tambahan -->
       <div>
-        <i class="fab fa-google-play mx-2"></i> <!-- Play Store Icon -->
-        <i class="fab fa-android mx-2"></i> <!-- Android Icon -->
-        <i class="fab fa-java mx-2"></i> <!-- Java Icon -->
+        <i class="fab fa-google-play mx-2" style="color: green;"></i> <!-- Play Store Icon -->
+        <i class="fab fa-android mx-2" style="color: lime;"></i> <!-- Android Icon -->
+        <i class="fab fa-java mx-2" style="color: orange;"></i> <!-- Java Icon -->
       </div>
       <!-- Tombol Edit dan Delete -->
       <div>
