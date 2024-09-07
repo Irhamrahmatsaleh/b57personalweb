@@ -1,0 +1,63 @@
+		/*  */
+		.nav-link {
+		  position: relative;
+		  text-decoration: none;
+		  /* Hilangkan garis bawah default */
+		}
+
+		.nav-link::after {
+		  content: '';
+		  position: absolute;
+		  width: 0;
+		  height: 2px;
+		  bottom: 0;
+		  left: 0;
+		  background-color: white;
+		  /* Warna garis bawah */
+		  transition: width 0.3s ease;
+		  /* Animasi garis bawah */
+		}
+
+		.nav-link:hover::after {
+		  width: 100%;
+		  /* Lebar garis bawah saat hover */
+		}
+
+		/*  */
+		/* Menghilangkan garis pada logo social media */
+		.social-media a img {
+		  border: none;
+		  outline: none;
+		  width: 30px;
+		  height: 30px;
+		}
+
+		/* Menambahkan style agar konten di dalam box besar */
+		.content-box {
+		  background-color: #f8f9fa;
+		  padding: 20px;
+		  border-radius: 10px;
+		  margin-bottom: 20px;
+		}
+
+		/* Mengatur jarak yang responsif */
+		.profile-img {
+		  width: 100%;
+		  height: auto;
+		  max-width: 250px;
+		  object-fit: cover;
+		}
+
+		.contact-btn,
+		.cv-btn {
+		  margin-right: 10px;
+		}
+
+		.social-media {
+		  margin-top: 20px;
+		}
+
+		/* Mengatur margin pada social-media untuk jarak yang akurat */
+		.social-media a {
+		  margin-right: 10px;
+		}

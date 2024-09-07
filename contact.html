@@ -5,74 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Me - Irham Rahmat Saleh</title>
+  <link rel="stylesheet" href="assets/css/contact.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .nav-link {
-      position: relative;
-      text-decoration: none;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: white;
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .contact-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f7f7f7;
-    }
-
-    .contact-form {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      width: 100%;
-    }
-
-    .form-group label {
-      margin-bottom: 0.5rem;
-    }
-
-    #submit {
-      background-color: #28a745;
-      color: white;
-      width: 100%;
-    }
-
-    textarea {
-      resize: none;
-    }
-
-    h2 {
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: #28a745;
-    }
-
-    @media (max-width: 768px) {
-      .contact-container {
-        height: auto;
-        padding: 2rem;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -133,7 +69,7 @@
           <label for="message">Message</label>
           <textarea id="message" class="form-control" name="message" rows="5"></textarea>
         </div>
-        <div class="form-group mb-3">
+        <div class="d-flex justify-content-end">
           <input id="submit" class="btn btn-success" type="submit" value="Send Message">
         </div>
       </form>
@@ -147,7 +83,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-  <script src="contact.js"></script>
+  <script src="assets/js/contact.js"></script>
 </body>
 
 </html>
