@@ -18,7 +18,8 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![LinkedIn][linkedin-shield]][https://www.linkedin.com/in/irham-rahmat-saleh-a03153169/]
+![image](https://github.com/user-attachments/assets/c6ea709f-709e-4fb2-9b0f-c08617d83432)
+
 
 
 
@@ -26,10 +27,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/Irhamrahmatsaleh/b57personalweb">
-    <img src="#" alt="Logo" width="80" height="80">
+    <img src="https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/icon/favicon.ico" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Personal Blog</h3>
+<h3 align="center">Personal Web</h3>
 
   <p align="center">
     Personal Web project during Batch-57 Dumbways.id Fullstack Bootcamp
@@ -72,27 +73,27 @@ In this Blog-like app you could do amazing things such as :
 <ol>
 <li>See my profile card</li>
 
-![image]()
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/profileCard.png)
 
 <li>See all post user Project</li>
 
-![image]()
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/projectCard.png)
 
 <li>See detailed project</li>
 
-![image]()
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/projectDetail.png)
 
 <li>Edit & Delete project</li>
 
-![image]()
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/Edit%26DeletCard.png)
 
 <li>Add Project Form</li>
 
-![image]()
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/addProjectForm.png)
 
 <li>Contact Form</li>
 
-![image]()
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/contactForm.png)
 
 </ol>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
