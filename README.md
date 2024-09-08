@@ -73,7 +73,7 @@ In this Blog-like app you could do amazing things such as :
 <ol>
 <li>See my profile card</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/profileCard.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/homePageNew.png)
 
 <li>See all post user Project</li>
 
@@ -81,7 +81,7 @@ In this Blog-like app you could do amazing things such as :
 
 <li>See detailed project</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/projectDetail.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/projectDetailNew.png)
 
 <li>Edit & Delete project</li>
 
@@ -90,6 +90,10 @@ In this Blog-like app you could do amazing things such as :
 <li>Add Project Form</li>
 
 ![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/addProjectForm.png)
+
+<li>Testimonials</li>
+
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/testimonials.png)
 
 <li>Contact Form</li>
 
