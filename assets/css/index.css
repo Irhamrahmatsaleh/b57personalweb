@@ -42,7 +42,7 @@
 
 		/* Mengatur jarak yang responsif */
 		.profile-img {
-			width: 80%;
+			width: 100%;
 			height: auto;
 			max-width: 250px;
 			object-fit: cover;
