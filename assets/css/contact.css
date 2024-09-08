@@ -1,4 +1,4 @@
-    .nav-link {
+    /* .nav-link {
       position: relative;
       text-decoration: none;
     }
@@ -16,6 +16,31 @@
 
     .nav-link:hover::after {
       width: 100%;
+    } */
+
+    /*  */
+    .nav-link {
+      position: relative;
+      text-decoration: none;
+      /* Hilangkan garis bawah default */
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      /* Warna garis bawah */
+      transition: width 0.3s ease;
+      /* Animasi garis bawah */
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+      /* Lebar garis bawah saat hover */
     }
 
     .contact-container {

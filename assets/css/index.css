@@ -63,7 +63,7 @@
 		}
 
 
-		@keyframes colorChange {
+		/* @keyframes colorChange {
 			0% {
 				background-color: #28a745;
 			}
@@ -103,3 +103,5 @@
 			animation: colorChange 5s infinite ease-in-out;
 			/* Animasi perubahan warna */
 		}
+
+		*/
