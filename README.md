@@ -73,11 +73,11 @@ In this Blog-like app you could do amazing things such as :
 <ol>
 <li>See my profile card</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/homePage.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/HOME.png)
 
 <li>See all post user Project</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/projectCard.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/USER-PROJECT.png)
 
 <li>See detailed project</li>
 
@@ -85,19 +85,19 @@ In this Blog-like app you could do amazing things such as :
 
 <li>Edit & Delete project</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/Edit%26DeletCard.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/EDIT%26DELETE.png)
 
 <li>Add Project Form</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/addProjectForm.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/ADD-PROJECT.png)
+
+<li>Contact Form</li>
+
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/CONTACT-FORM.png)
 
 <li>Testimonials</li>
 
 ![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/testimonials.png)
-
-<li>Contact Form</li>
-
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/contactForm.png)
 
 </ol>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
