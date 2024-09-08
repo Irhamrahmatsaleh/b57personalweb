@@ -61,3 +61,45 @@
 		.social-media a {
 			margin-right: 10px;
 		}
+
+
+		@keyframes colorChange {
+			0% {
+				background-color: #28a745;
+			}
+
+			25% {
+				background-color: #17a2b8;
+			}
+
+			50% {
+				background-color: #ffc107;
+			}
+
+			75% {
+				background-color: #dc3545;
+			}
+
+			100% {
+				background-color: #28a745;
+			}
+		}
+
+		.animated-box {
+			margin-left: 29px;
+			width: 80%;
+			height: 80px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 10px;
+			color: white;
+			font-size: 24px;
+			font-weight: bold;
+			opacity: 0;
+			transform: scale(0);
+			transition: transform 0.5s ease, opacity 0.5s ease;
+			margin-bottom: 30px;
+			animation: colorChange 5s infinite ease-in-out;
+			/* Animasi perubahan warna */
+		}
