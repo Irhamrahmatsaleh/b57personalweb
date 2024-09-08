@@ -32,7 +32,7 @@ function loadProjects() {
     // `;
     card.innerHTML = `
   <img src="${project.imageUrl}" class="card-img-top" alt="Project Image">
-  <div class="card-body">
+  <div class="card-body shadow-lg">
     <h2 class="card-title h5">${project.projectName}</h2>
     <p class="card-text">${new Date(project.startDate).getFullYear()}</p>
     <p class="card-text">Duration: ${getProjectDuration(project.startDate, project.endDate)}</p>
@@ -42,7 +42,7 @@ function loadProjects() {
     </div>
     <div class="d-flex justify-content-between align-items-center">
       <!-- Ikon tambahan -->
-      <div>
+      <div style="font-size: 20px;">
         <i class="fab fa-google-play mx-2" style="color: green;"></i> <!-- Play Store Icon -->
         <i class="fab fa-android mx-2" style="color: lime;"></i> <!-- Android Icon -->
         <i class="fab fa-java mx-2" style="color: orange;"></i> <!-- Java Icon -->

@@ -41,13 +41,25 @@
   <main style="padding-top: 80px;">
     <section class="testimonials-section">
       <h1>My Testimonials</h1>
-      <div id="filter-stars" class="filter-stars" style="padding-top: 20px;">
-        <button onclick="filterTestimonials('all')">All Stars</button>
-        <button onclick="filterTestimonials(1)"><i class="fas fa-star"></i> 1 Star</button>
-        <button onclick="filterTestimonials(2)"><i class="fas fa-star"></i> 2 Stars</button>
-        <button onclick="filterTestimonials(3)"><i class="fas fa-star"></i> 3 Stars</button>
-        <button onclick="filterTestimonials(4)"><i class="fas fa-star"></i> 4 Stars</button>
-        <button onclick="filterTestimonials(5)"><i class="fas fa-star"></i> 5 Stars</button>
+      <div id="filter-stars"
+        class="filter-stars d-flex flex-wrap justify-content-center gap-2 p-3 border rounded text-center"
+        style="background-color: #f8f9fa;">
+        <button class="btn btn-outline-secondary rounded-pill" onclick="filterTestimonials('all')">All Stars</button>
+        <button class="btn btn-outline-secondary rounded-pill" onclick="filterTestimonials(1)">
+          <i class="fas fa-star text-warning"></i> 1 Star
+        </button>
+        <button class="btn btn-outline-secondary rounded-pill" onclick="filterTestimonials(2)">
+          <i class="fas fa-star text-warning"></i> 2 Stars
+        </button>
+        <button class="btn btn-outline-secondary rounded-pill" onclick="filterTestimonials(3)">
+          <i class="fas fa-star text-warning"></i> 3 Stars
+        </button>
+        <button class="btn btn-outline-secondary rounded-pill" onclick="filterTestimonials(4)">
+          <i class="fas fa-star text-warning"></i> 4 Stars
+        </button>
+        <button class="btn btn-outline-secondary rounded-pill" onclick="filterTestimonials(5)">
+          <i class="fas fa-star text-warning"></i> 5 Stars
+        </button>
       </div>
       <div id="testimonials" class="testimonials-container" style="padding-top: 50px;">
         <!-- Testimonial cards akan diisi oleh JavaScript -->
