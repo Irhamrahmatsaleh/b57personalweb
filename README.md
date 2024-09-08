@@ -73,7 +73,7 @@ In this Blog-like app you could do amazing things such as :
 <ol>
 <li>See my profile card</li>
 
-![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/homePageNew.png)
+![image](https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/project-img/homePage.png)
 
 <li>See all post user Project</li>
 
