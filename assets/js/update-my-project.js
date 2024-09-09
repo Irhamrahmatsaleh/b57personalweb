@@ -63,7 +63,7 @@ document.getElementById('projectForm').addEventListener('submit', function (even
       };
 
       localStorage.setItem('projects', JSON.stringify(projects));
-      window.location.href = 'index.html'; // Kembali ke halaman utama setelah berhasil edit
+      window.location.href = '/'; // Kembali ke halaman utama setelah berhasil edit
     } else {
       alert('Proyek tidak ditemukan!');
     }

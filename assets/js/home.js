@@ -59,7 +59,7 @@ function loadProjects() {
 
     card.addEventListener('click', function (e) {
       if (!e.target.classList.contains('edit') && !e.target.classList.contains('delete')) {
-        window.location.href = `project-detail.html?id=${project.id}`;
+        window.location.href = `project-detail?id=${project.id}`;
       }
     });
 
@@ -103,7 +103,7 @@ function deleteProject(projectId) {
 
 // Fungsi untuk mengedit proyek (sementara diarahkan kembali ke form addProject.html untuk update)
 function editProject(projectId) {
-  window.location.href = `update-my-project.html?editId=${projectId}`;
+  window.location.href = `update-my-project?editId=${projectId}`;
 }
 
 // Load projects on page load

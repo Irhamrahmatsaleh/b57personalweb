@@ -7,11 +7,13 @@
   <title>Add Project</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link rel="stylesheet" href="assets/css/addProject.css">
+  <link rel="stylesheet" href="/css/addProject.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-success fixed-top">
+  {{> header}} <!-- Include header partial -->
+
+  {{!-- <nav class="navbar navbar-expand-lg navbar-light bg-success fixed-top">
     <div class="container-fluid">
       <a href="index.html"><img style="width: 50px; height: 50px; object-fit: contain"
           src="https://dumbways.id/assets/images/brandwhite.png" class="navbar-logo" /></a>
@@ -22,22 +24,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
           <li class="nav-item">
-            <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" href="index.html">Home</a>
+            <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" href="/index">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" href="addProject.html">Add
+            <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" href="/addProject">Add
               Project</a>
           </li>
         </ul>
-        <a class="btn btn-dark bg-success" href="contact.html">Contact Me</a>
+        <a class="btn btn-dark bg-success" href="contact/">Contact Me</a>
       </div>
     </div>
-  </nav>
+  </nav> --}}
 
   <div class="d-flex flex-column align-items-center" style="padding-top: 80px;">
     <section class="form-section shadow">
       <h1>ADD MY PROJECT</h1>
-      <form id="projectForm">
+      <form id="projectForm" method="POST" action="/addProject">
         <label for="projectName">Project Name</label>
         <input type="text" id="projectName" name="projectName" required>
 
@@ -100,7 +102,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-  <script src="assets/js/addProject.js"></script>
+  <script src="/js/addProject.js"></script>
+
+  {{> footer}} <!-- Include footer partial -->
 </body>
 
 </html>
