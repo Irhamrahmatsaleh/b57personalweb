@@ -17,7 +17,7 @@
   <div class="d-flex flex-column align-items-center" style="padding-top: 80px;">
     <section class="form-section">
       <h1>UPDATE MY PROJECT</h1>
-      <form id="projectForm" action="/update-my-project" method="POST" enctype="multipart/form-data">
+      <form id="projectForm" enctype="multipart/form-data"> <!-- action="/update-my-project" method="POST"-->
 
         <label for="projectName">Project Name</label>
         <input type="text" id="projectName" name="projectName" required value="{{projectName}}">

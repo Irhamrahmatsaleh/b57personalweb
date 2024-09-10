@@ -35,20 +35,20 @@ app.get('/addProject', (req, res) => {
   res.render('addProject');
 });
 
-// app.post('/addProject', (req, res) => {
-//   // Ambil data dari form
-//   const { projectName, startDate, endDate, description, technologies } = req.body;
+app.post('/addProject', (req, res) => {
+  // Ambil data dari form
+  const { projectName, startDate, endDate, description, technologies } = req.body;
 
-//   // Tampilkan data ke terminal
-//   console.log('Project Name:', projectName);
-//   console.log('Start Date:', startDate);
-//   console.log('End Date:', endDate);
-//   console.log('Description:', description);
-//   console.log('Technologies:', technologies);
+  // Tampilkan data ke terminal
+  console.log('Project Name:', projectName);
+  console.log('Start Date:', startDate);
+  console.log('End Date:', endDate);
+  console.log('Description:', description);
+  console.log('Technologies:', technologies);
 
-//   // Redirect atau tampilkan pesan sukses
-//   res.send('Project data received. Check your terminal.');
-// });
+  // Redirect atau tampilkan pesan sukses
+  res.send('Project data received. Check your terminal.');
+});
 
 app.get('/contact', (req, res) => {
   res.render('contact');
