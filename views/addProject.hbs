@@ -16,7 +16,7 @@
   <div class="d-flex flex-column align-items-center" style="padding-top: 80px;">
     <section class="form-section shadow">
       <h1>ADD MY PROJECT</h1>
-      <form id="projectForm"> <!--  method="POST" action="/addProject"-->
+      <form id="projectForm"> <!-- method="POST" action="/addProject" -->
         <label for="projectName">Project Name</label>
         <input type="text" id="projectName" name="projectName" required>
 
@@ -35,32 +35,6 @@
         <textarea id="description" name="description" rows="4" required></textarea>
 
         <label>Technologies</label>
-        {{!-- <div class="tech-checkboxes col-md-4" style="gap: 20px;">
-          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-            <input type="checkbox" id="nodejs" name="technologies" value="Node.js">
-            <label for="nodejs">Node.js</label>
-          </div>
-          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-            <input type="checkbox" id="reactjs" name="technologies" value="React.js">
-            <label for="reactjs">React.js</label>
-          </div>
-          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-            <input type="checkbox" id="nextjs" name="technologies" value="Next.js">
-            <label for="nextjs">Next.js</label>
-          </div>
-          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-            <input type="checkbox" id="typescript" name="technologies" value="TypeScript">
-            <label for="typescript">TypeScript</label>
-          </div>
-          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-            <input type="checkbox" id="angular" name="technologies" value="angular">
-            <label for="angular">Angular</label>
-          </div>
-          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-            <input type="checkbox" id="java" name="technologies" value="java">
-            <label for="java">Java </label>
-          </div>
-        </div> --}}
         <div class="tech-checkboxes col-md-6">
           <div class="checkbox-item">
             <input type="checkbox" id="nodejs" name="technologies" value="Node.js">
@@ -86,18 +60,6 @@
             <input type="checkbox" id="java" name="technologies" value="Java">
             <label for="java">Java</label>
           </div>
-          {{!-- <div class="checkbox-item">
-            <input type="checkbox" id="c++" name="technologies" value="c++">
-            <label for="c++">C++</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="c#" name="technologies" value="c#">
-            <label for="c#">C#</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="other" name="technologies" value="other">
-            <label for="other">Other</label>
-          </div> --}}
         </div>
 
         <div class="mt-3">
