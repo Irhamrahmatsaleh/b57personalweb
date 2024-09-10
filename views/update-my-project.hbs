@@ -16,48 +16,52 @@
 
   <div class="d-flex flex-column align-items-center" style="padding-top: 80px;">
     <section class="form-section">
-      <h1>EDIT MY PROJECT</h1>
-      {{!-- <form id="projectForm"> --}}
-        <form id="projectForm" action="/update-my-project" method="POST">
+      <h1>UPDATE MY PROJECT</h1>
+      <form id="projectForm" action="/update-my-project" method="POST" enctype="multipart/form-data">
 
-          <label for="projectName">Project Name</label>
-          <input type="text" id="projectName" name="projectName" required value="{{projectName}}">
+        <label for="projectName">Project Name</label>
+        <input type="text" id="projectName" name="projectName" required value="{{projectName}}">
 
-          <div class="date-inputs">
-            <div>
-              <label for="startDate">Start Date</label>
-              <input type="date" id="startDate" name="startDate" required value="{{startDate}}">
-            </div>
-            <div>
-              <label for="endDate">End Date</label>
-              <input type="date" id="endDate" name="endDate" required value="{{endDate}}">
-            </div>
+        <div class="date-inputs">
+          <div>
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" required value="{{startDate}}">
           </div>
-
-          <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" required>{{description}}</textarea>
-
-          <label>Technologies</label>
-          <div class="tech-checkboxes col-md-4" style="gap: 20px;">
-            {{#each technologies}}
-            <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
-              <input type="checkbox" id="{{this.id}}" name="technologies" value="{{this.value}}" {{#if
-                this.checked}}checked{{/if}}>
-              <label for="{{this.id}}">{{this.label}}</label>
-            </div>
-            {{/each}}
+          <div>
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate" required value="{{endDate}}">
           </div>
+        </div>
 
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" required>{{description}}</textarea>
+
+        <label>Technologies</label>
+        <div class="tech-checkboxes col-md-4" style="gap: 20px;">
+          {{#each technologies}}
+          <div class="shadow text-success" style="border-radius: 5px; padding: 5px 5px 0 0;">
+            <input type="checkbox" id="{{this.id}}" name="technologies" value="{{this.value}}" {{#if
+              this.checked}}checked{{/if}}>
+            <label for="{{this.id}}">{{this.label}}</label>
+          </div>
+          {{/each}}
+        </div>
+        <div class="mt-3">
           <label for="uploadImage">Upload Image</label>
-          <div class="file-upload">
+          <div class="image-preview">
+            <img id="imagePreview" src="{{imageUrl}}" alt="Image Preview"
+              style="display: {{#if imageUrl}}block{{else}}none{{/if}}; width: 20%; height: auto; border-radius: 7px;" />
+          </div>
+          <div class="file-upload" style="margin-top: 10px;">
             <input type="file" id="uploadImage" name="uploadImage" accept="image/*">
             <i class="fas fa-paperclip"></i>
           </div><br>
 
           <div class="d-flex justify-content-end">
-            <button type="submit" class="bg-success">Update Project</button>
+            <button type="submit" class="bg-success">submit</button>
           </div>
-        </form>
+        </div>
+      </form>
     </section>
   </div>
 

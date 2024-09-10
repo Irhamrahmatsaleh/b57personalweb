@@ -14,25 +14,9 @@ function loadProjects() {
       ? project.description.substring(0, 100) + '...'
       : project.description;
 
-    // card.innerHTML = `
-    //   <img src="${project.imageUrl}" class="card-img-top" alt="Project Image">
-    //   <div class="card-body">
-    //     <h2 class="card-title h5">${project.projectName}</h2>
-    //     <p class="card-text">${new Date(project.startDate).getFullYear()}</p>
-    //     <p class="card-text">Duration: ${getProjectDuration(project.startDate, project.endDate)}</p>
-    //     <p class="card-text">${shortDescription}</p> <!-- Tampilkan deskripsi pendek -->
-    //     <div class="icons mb-3">
-    //       ${project.technologies.map(tech => `<i class="fab fa-${tech.toLowerCase()} mx-1"></i>`).join('')}
-    //     </div>
-    //     <div class="d-flex justify-content-between">
-    //       <button class="btn btn-warning edit btn-sm" data-id="${project.id}">Edit</button>
-    //       <button class="btn btn-danger delete btn-sm" data-id="${project.id}">Delete</button>
-    //     </div>
-    //   </div>
-    // `;
     card.innerHTML = `
   <img src="${project.imageUrl}" class="card-img-top" alt="Project Image">
-  <div class="card-body shadow-lg">
+  <div class="card-body shadow">
     <h2 class="card-title h5">${project.projectName}</h2>
     <p class="card-text">${new Date(project.startDate).getFullYear()}</p>
     <p class="card-text">Duration: ${getProjectDuration(project.startDate, project.endDate)}</p>
@@ -101,7 +85,7 @@ function deleteProject(projectId) {
   loadProjects(); // Refresh tampilan
 }
 
-// Fungsi untuk mengedit proyek (sementara diarahkan kembali ke form addProject.html untuk update)
+// Fungsi untuk mengedit proyek
 function editProject(projectId) {
   window.location.href = `update-my-project?editId=${projectId}`;
 }

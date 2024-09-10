@@ -20,6 +20,7 @@ function loadProjectDetails() {
 
   if (!project) {
     console.error('Project not found');
+    alert('Project not found!');
     return;
   }
 

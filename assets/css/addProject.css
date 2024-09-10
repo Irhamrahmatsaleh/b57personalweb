@@ -117,3 +117,53 @@
         margin-bottom: 10px;
       }
     }
+
+    .tech-checkboxes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      /* Tiga kolom untuk desktop */
+      gap: 20px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .checkbox-item:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      margin-right: 10px;
+      width: 20px;
+      /* Ukuran checkbox lebih besar dan presisi */
+      height: 20px;
+      /* Ukuran checkbox lebih besar dan presisi */
+      cursor: pointer;
+    }
+
+    .checkbox-item label {
+      font-weight: 500;
+      color: #343a40;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .tech-checkboxes {
+        grid-template-columns: repeat(2, 1fr);
+        /* Dua kolom untuk mobile */
+      }
+    }
+
+    @media (max-width: 576px) {
+      .tech-checkboxes {
+        grid-template-columns: 1fr;
+        /* Satu kolom untuk layar sangat kecil */
+      }
+    }
