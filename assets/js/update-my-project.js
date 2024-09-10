@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const project = projects.find(proj => proj.id == projectId);
 
     if (!project) {
-      alert('Project not found!');
+      alert('SILAHKAN ANDA MEMBUAT PROJECT');
       window.location.href = '/';
       return;
     }

@@ -6,45 +6,6 @@ const { engine } = require('express-handlebars');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Data statis untuk proyek
-const staticProjects = [
-  {
-    id: 1001,
-    projectName: "Static E-Commerce Project",
-    startDate: "2023-05-01",
-    endDate: "2023-08-01",
-    description: "Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project'. Anda dapat menambahkan proyek apa pun di halaman ini dengan kontrol penuh. Fitur CRUD (Create, Read, Update, Delete) yang tersedia memungkinkan Anda untuk Menambahkan nama proyek, tanggal mulai, tanggal selesai, deskripsi, teknologi, dan foto. Mengedit informasi proyek yang telah ada. Menghapus proyek yang tidak diperlukan. Silakan jelajahi website kami dan jika Anda menemukan bug atau kesalahan pada fungsionalitas, hubungi kami melalui formulir Contact Me. Kami akan dengan senang hati menerima masukan Anda.",
-    technologies: ["html5", "css3", "js"],
-    imageUrl: "/img/projectStaticImage/e-commerce.jpg"
-  },
-  {
-    id: 1002,
-    projectName: "Static Android Project",
-    startDate: "2022-01-15",
-    endDate: "2022-03-15",
-    description: "Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project'. Anda dapat menambahkan proyek apa pun di halaman ini dengan kontrol penuh. Fitur CRUD (Create, Read, Update, Delete) yang tersedia memungkinkan Anda untuk Menambahkan nama proyek, tanggal mulai, tanggal selesai, deskripsi, teknologi, dan foto. Mengedit informasi proyek yang telah ada. Menghapus proyek yang tidak diperlukan. Silakan jelajahi website kami dan jika Anda menemukan bug atau kesalahan pada fungsionalitas, hubungi kami melalui formulir Contact Me. Kami akan dengan senang hati menerima masukan Anda.",
-    technologies: ["React", "Java", "Python", "nodejs"],
-    imageUrl: "/img/projectStaticImage/android.jpg"
-  },
-  {
-    id: 1003,
-    projectName: "Static IOS Project",
-    startDate: "2022-01-15",
-    endDate: "2022-05-15",
-    description: "Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project'. Anda dapat menambahkan proyek apa pun di halaman ini dengan kontrol penuh. Fitur CRUD (Create, Read, Update, Delete) yang tersedia memungkinkan Anda untuk Menambahkan nama proyek, tanggal mulai, tanggal selesai, deskripsi, teknologi, dan foto. Mengedit informasi proyek yang telah ada. Menghapus proyek yang tidak diperlukan. Silakan jelajahi website kami dan jika Anda menemukan bug atau kesalahan pada fungsionalitas, hubungi kami melalui formulir Contact Me. Kami akan dengan senang hati menerima masukan Anda.",
-    technologies: ["React", "Java", "Python", "nodejs"],
-    imageUrl: "/img/projectStaticImage/ios.jpg"
-  }
-];
-
-// Fungsi untuk menghitung durasi proyek dalam bulan
-function getProjectDuration(startDate, endDate) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  const duration = Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 30)); // Durasi dalam bulan
-  return `${duration} months`;
-}
-
 // Setup Handlebars view engine dengan helper
 const hbs = engine({
   extname: 'hbs',
@@ -94,21 +55,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/project-detail', (req, res) => {
-  const projectId = parseInt(req.query.id); // Ambil ID proyek dari query parameter
-  const project = staticProjects.find(proj => proj.id === projectId);
-
-  if (project) {
-    res.render('project-detail', {
-      projectTitle: project.projectName,
-      projectImage: project.imageUrl,
-      dateRange: `${new Date(project.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} - ${new Date(project.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`,
-      timeDuration: getProjectDuration(project.startDate, project.endDate),
-      projectDescription: project.description,
-      technologies: project.technologies
-    });
-  } else {
-    res.status(404).send('Project not found');
-  }
+  res.render('project-detail');
 });
 
 app.get('/testimonials', (req, res) => {

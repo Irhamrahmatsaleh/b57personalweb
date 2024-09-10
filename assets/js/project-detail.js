@@ -22,8 +22,8 @@ function loadProjectDetails() {
 
   if (!project) {
     console.error('Project not found');
-    // alert('Project not found!');
-    // window.location.href = '/';
+    alert('DIHARAPKAN UNTUK MEMBUAT PROJECT SENDIRI');
+    window.location.href = '/';
     return;
   }
 
