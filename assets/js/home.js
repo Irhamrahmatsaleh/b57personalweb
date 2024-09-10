@@ -1,11 +1,51 @@
 
 function loadProjects() {
-  const projects = JSON.parse(localStorage.getItem('projects')) || [];
-  const projectContainer = document.querySelector('.project-section .row');
+  // Data statis untuk ditampilkan di awal
+  const staticProjects = [
+    {
+      id: 1001,
+      projectName: "Static E-Commerce Project",
+      startDate: "2023-05-01",
+      endDate: "2023-08-01",
+      description: "\"Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' \".",
+      technologies: ["html5", "css3", "js"],
+      imageUrl: "./img/projectStaticImage/e-commerce.jpg"
+    },
+    {
+      id: 1002,
+      projectName: "Static Android Project",
+      startDate: "2022-01-15",
+      endDate: "2022-03-15",
+      description: "\"Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' \".",
+      technologies: ["react", "nodejs"],
+      imageUrl: "./img/projectStaticImage/android.jpg"
+    },
+    {
+      id: 1003,
+      projectName: "Static IOS Project",
+      startDate: "2022-01-15",
+      endDate: "2022-05-15",
+      description: "\"Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' \".",
+      technologies: ["react", "nodejs"],
+      imageUrl: "./img/projectStaticImage/ios.jpg"
+    }
+  ];
+  //------------------------------------------------
 
+  //------------------------------------------------
+
+
+  // Data dari localStorage (proyek yang ditambahkan user)
+  const projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+
+  // Gabungkan proyek statis dan proyek dari localStorage
+  const allProjects = [...projects, ...staticProjects];
+
+  const projectContainer = document.querySelector('.project-section .row');
   projectContainer.innerHTML = '';
 
-  projects.forEach((project) => {
+  allProjects.forEach((project) => {
     const card = document.createElement('div');
     card.classList.add('card', 'col-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'm-2', 'p-0', 'shadow-sm');
 
@@ -39,7 +79,6 @@ function loadProjects() {
     </div>
   </div>
 `;
-
 
     card.addEventListener('click', function (e) {
       if (!e.target.classList.contains('edit') && !e.target.classList.contains('delete')) {
