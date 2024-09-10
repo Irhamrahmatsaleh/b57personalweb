@@ -1,4 +1,6 @@
 
+//-------------------------------------------------------------
+
 // Fungsi untuk mendapatkan nilai parameter query dari URL
 function getQueryParameter(param) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -20,8 +22,8 @@ function loadProjectDetails() {
 
   if (!project) {
     console.error('Project not found');
-    alert('Project not found!');
-    window.location.href = '/';
+    // alert('Project not found!');
+    // window.location.href = '/';
     return;
   }
 

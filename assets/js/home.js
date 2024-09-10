@@ -7,7 +7,7 @@ function loadProjects() {
       projectName: "Static E-Commerce Project",
       startDate: "2023-05-01",
       endDate: "2023-08-01",
-      description: "\"Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' \".",
+      description: "Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' .",
       technologies: ["html5", "css3", "js"],
       imageUrl: "./img/projectStaticImage/e-commerce.jpg"
     },
@@ -16,8 +16,8 @@ function loadProjects() {
       projectName: "Static Android Project",
       startDate: "2022-01-15",
       endDate: "2022-03-15",
-      description: "\"Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' \".",
-      technologies: ["react", "nodejs"],
+      description: "Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' .",
+      technologies: ["react", "Java", "Python", "nodejs"],
       imageUrl: "./img/projectStaticImage/android.jpg"
     },
     {
@@ -25,8 +25,8 @@ function loadProjects() {
       projectName: "Static IOS Project",
       startDate: "2022-01-15",
       endDate: "2022-05-15",
-      description: "\"Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' \".",
-      technologies: ["react", "nodejs"],
+      description: "Jika Anda ingin memodifikasi proyek, silakan buat proyek baru dengan menekan menu 'Add Project' .",
+      technologies: ["react", "Java", "Python", "nodejs"],
       imageUrl: "./img/projectStaticImage/ios.jpg"
     }
   ];
