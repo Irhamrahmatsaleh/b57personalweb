@@ -27,8 +27,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/Irhamrahmatsaleh/b57personalweb">
-    <img src="https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/icon/favicon.ico" alt="Logo" width="80" height="80">
+    <img src="https://github.com/Irhamrahmatsaleh/b57personalweb/blob/main/assets/img/icon/1720260976635-fotor-bg-remover-2024091121330.png" style="border-radius: 50%; width: 80px; height: 80px;" alt="Logo">
   </a>
+</div>
 
 <h3 align="center">Personal Web</h3>
 
@@ -101,3 +102,38 @@ In this Blog-like app you could do amazing things such as :
 
 </ol>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+* [![Nodejs][Nodejs-logo]][Nodejs-url]
+* [![Express][Express-logo]][Express-url]
+* [![Handlebars][Hbs-logo]][Hbs-url]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+## Usage
+## Running the Project Locally
+
+1. **Download ZIP** and extract the files, or **Fork** the repository.
+2. Open the terminal, navigate to the project directory, and run:
+   ```bash
+   npm install
+   npm run dev
+<!--       -->
+   Open your browser and go to http://localhost:3000
+   
+This includes the correct command to start your development server.
+
+
+<!-- Logo Definitions -->
+[Nodejs-logo]: https://img.shields.io/badge/Node.js-43853d?style=for-the-badge&logo=node.js&logoColor=white
+[Nodejs-url]: https://nodejs.org/
+[Express-logo]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[Express-url]: https://expressjs.com/
+[Hbs-logo]: https://img.shields.io/badge/Handlebars.js-f0772b?style=for-the-badge&logo=handlebars.js&logoColor=white
+[Hbs-url]: https://handlebarsjs.com/
+
+
+
