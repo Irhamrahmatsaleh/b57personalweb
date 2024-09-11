@@ -16,7 +16,7 @@
   <div class="d-flex flex-column align-items-center" style="padding-top: 80px;">
     <section class="form-section shadow">
       <h1>ADD MY PROJECT</h1>
-      <form id="projectForm"> <!-- method="POST" action="/addProject" -->
+      <form id="projectForm" method="POST" action="/addProject" enctype="multipart/form-data">
         <label for="projectName">Project Name</label>
         <input type="text" id="projectName" name="projectName" required>
 
@@ -85,7 +85,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="/js/addProject.js"></script>
-
+  <script src="../server.js"></script>
   {{> footer}} <!-- Include footer partial -->
 </body>
 

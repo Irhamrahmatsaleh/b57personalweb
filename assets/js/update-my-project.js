@@ -1,100 +1,91 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Ambil ID proyek dari URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const projectId = +urlParams.get('editId');
 
-  // Muat data proyek yang akan diedit
-  function loadProjectData() {
-    const projects = JSON.parse(localStorage.getItem('projects')) || [];
-    const project = projects.find(proj => proj.id == projectId);
 
-    if (!project) {
-      alert('SILAHKAN ANDA MEMBUAT PROJECT');
-      window.location.href = '/';
-      return;
+// Ambil parameter ID dari URL
+const urlParams = new URLSearchParams(window.location.search);
+const projectId = urlParams.get('editId');
+
+// Fungsi untuk mendapatkan data proyek berdasarkan ID
+async function loadProjectData(projectId) {
+  try {
+    const response = await fetch(`/api/projects/${projectId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch project data');
     }
+
+    const project = await response.json();
 
     // Isi form dengan data proyek
     document.getElementById('projectName').value = project.projectName;
-    document.getElementById('startDate').value = project.startDate;
-    document.getElementById('endDate').value = project.endDate;
+    document.getElementById('startDate').value = project.startDate.split('T')[0];
+    document.getElementById('endDate').value = project.endDate.split('T')[0];
     document.getElementById('description').value = project.description;
 
-    // Centang teknologi yang digunakan
+    // Centang checkbox teknologi yang relevan
+    const techCheckboxes = document.querySelectorAll('input[name="technologies"]');
     project.technologies.forEach(tech => {
-      document.querySelector(`input[value="${tech}"]`).checked = true;
+      techCheckboxes.forEach(checkbox => {
+        if (checkbox.value === tech) {
+          checkbox.checked = true;
+        }
+      });
     });
 
-    // Tampilkan gambar yang sudah ada
+    // Tampilkan gambar yang sudah diupload
     const imagePreview = document.getElementById('imagePreview');
     imagePreview.src = project.imageUrl;
-    imagePreview.style.display = project.imageUrl ? 'block' : 'none';
+    imagePreview.style.display = 'block';
 
-    // Simpan URL gambar yang sudah ada jika tidak ingin mengganti gambar
-    document.getElementById('uploadImage').dataset.existingImage = project.imageUrl;
+  } catch (error) {
+    console.error('Error loading project data:', error);
+  }
+}
+
+// Fungsi untuk menyimpan data proyek yang sudah diupdate
+async function saveProjectData(event) {
+  event.preventDefault(); // Mencegah reload halaman
+
+  const projectName = document.getElementById('projectName').value;
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
+  const description = document.getElementById('description').value;
+  const technologies = Array.from(document.querySelectorAll('input[name="technologies"]:checked')).map(checkbox => checkbox.value);
+
+  const formData = new FormData();
+  formData.append('projectName', projectName);
+  formData.append('startDate', startDate);
+  formData.append('endDate', endDate);
+  formData.append('description', description);
+  formData.append('technologies', JSON.stringify(technologies));
+
+  // Jika gambar diupload ulang
+  const uploadImage = document.getElementById('uploadImage').files[0];
+  if (uploadImage) {
+    formData.append('uploadImage', uploadImage);
   }
 
-  // Fungsi untuk menangani gambar yang diunggah
-  document.getElementById('uploadImage').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = function () {
-        document.getElementById('imagePreview').src = reader.result;
-        document.getElementById('imagePreview').style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+  try {
+    const response = await fetch(`/api/projects/${projectId}`, {
+      method: 'PUT',
+      body: formData
+    });
 
-  // Fungsi untuk menyimpan perubahan ke localStorage
-  document.getElementById('projectForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const projectName = document.getElementById('projectName').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-    const description = document.getElementById('description').value;
-    const technologies = Array.from(document.querySelectorAll('input[name="technologies"]:checked')).map(el => el.value);
-
-    const fileInput = document.getElementById('uploadImage');
-    const existingImage = fileInput.dataset.existingImage;
-    const file = fileInput.files[0];
-
-    const reader = new FileReader();
-
-    reader.onloadend = function () {
-      const imageUrl = file ? reader.result : existingImage; // Gunakan gambar baru jika ada, atau gambar lama jika tidak
-
-      // Update proyek di localStorage
-      const projects = JSON.parse(localStorage.getItem('projects')) || [];
-      const projectIndex = projects.findIndex(proj => proj.id == projectId);
-
-      if (projectIndex > -1) {
-        projects[projectIndex] = {
-          id: +projectId,
-          projectName,
-          startDate,
-          endDate,
-          description,
-          technologies,
-          imageUrl
-        };
-
-        localStorage.setItem('projects', JSON.stringify(projects));
-        window.location.href = '/'; // Kembali ke halaman utama setelah berhasil edit
-      } else {
-        alert('Proyek tidak ditemukan!');
-      }
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+    if (response.ok) {
+      alert('Project updated successfully!');
+      window.location.href = '/'; // Kembali ke halaman utama setelah update
     } else {
-      reader.onloadend(); // Gunakan gambar lama jika tidak ada file baru
+      alert('Failed to update project');
     }
-  });
+  } catch (error) {
+    console.error('Error updating project:', error);
+  }
+}
 
-  // Muat data proyek saat halaman dimuat
-  loadProjectData();
+// Load project data saat halaman dibuka
+document.addEventListener('DOMContentLoaded', () => {
+  if (projectId) {
+    loadProjectData(projectId);
+  }
+
+  // Pasang event listener untuk form submit
+  document.getElementById('projectForm').addEventListener('submit', saveProjectData);
 });
