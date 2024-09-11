@@ -117,13 +117,14 @@ In this Blog-like app you could do amazing things such as :
 ## Running the Project Locally
 
 1. **Download ZIP** and extract the files, or **Fork** the repository.
-2. Open the terminal, navigate to the project directory, and run:
+3. Set up the database using postgresql
+3. Open the terminal, navigate to the project directory, and run:
    ```bash
    npm install
    npm run dev
 <!--       -->
    Open your browser and go to http://localhost:3000
-   
+
 This includes the correct command to start your development server.
 
 
@@ -134,6 +135,3 @@ This includes the correct command to start your development server.
 [Express-url]: https://expressjs.com/
 [Hbs-logo]: https://img.shields.io/badge/Handlebars.js-f0772b?style=for-the-badge&logo=handlebars.js&logoColor=white
 [Hbs-url]: https://handlebarsjs.com/
-
-
-
