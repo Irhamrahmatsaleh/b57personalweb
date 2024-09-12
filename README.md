@@ -69,7 +69,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Welcome to Personal Web!
+Welcome to Personal Web!<br>
 In this Personal Web app you could do amazing things such as :
 <ol>
 <li>See my profile card</li>
