@@ -8,18 +8,22 @@ const { uploadImageToCloudinary, deleteImageFromCloudinary } = require('./upload
 const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+require('dotenv').config();
 // Setup Sequelize
 // const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
-const sequelize = new Sequelize('postgres://default:zveoVihu7r2A@ep-floral-sea-a1axbcq6.ap-southeast-1.aws.neon.tech:5432/verceldb', {
+const Sequelize = require('sequelize');
+
+// Menggunakan variabel environment untuk koneksi database
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: false, // Jangan lupa untuk menambahkan ini jika ssl diperlukan
+      rejectUnauthorized: false // Jika diperlukan
     }
   }
 });
+
 
 
 // Define Project model
