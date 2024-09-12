@@ -62,7 +62,7 @@ async function loadProjectDetails() {
       techList.appendChild(li);
     });
   } catch (error) {
-    console.error('Error fetching project data:', error);
+    // console.error('Error fetching project data:', error);
     // alert('Terjadi kesalahan saat memuat data proyek.');
   }
 }

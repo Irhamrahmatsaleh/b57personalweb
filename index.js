@@ -4,6 +4,7 @@ const path = require('path');
 const { engine } = require('express-handlebars');
 const multer = require('multer');
 const { Sequelize, DataTypes } = require('sequelize');
+const { uploadImageToCloudinary, deleteImageFromCloudinary } = require('./uploads/cloudinaryUpload');
 const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -58,21 +59,36 @@ app.get('/', (req, res) => {
 app.get('/addProject', (req, res) => {
   res.render('addProject');
 });
-
+//--------------FILE YANG DI UPLOAD KE CLOUD--------------//
 app.post('/addProject', upload.single('uploadImage'), async (req, res) => {
   try {
     const { projectName, startDate, endDate, description, technologies } = req.body;
-    const imageUrl = req.file ? req.file.path : null; // Path to the uploaded file
+    let imageUrl = null;
+
+    // Upload gambar ke Cloudinary jika ada file yang di-upload
+    if (req.file) {
+      imageUrl = await uploadImageToCloudinary(req.file.path); // Upload ke Cloudinary
+
+      // Hapus file gambar dari folder 'uploads' setelah berhasil di-upload ke Cloudinary
+      fs.unlink(req.file.path, (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+        } else {
+          console.log('File deleted from local storage');
+        }
+      });
+    }
 
     const techArray = Array.isArray(technologies) ? technologies : [technologies];
 
+    // Simpan data proyek ke database, hanya menyimpan URL gambar
     await Project.create({
       projectName,
       startDate,
       endDate,
       description,
       technologies: techArray,
-      imageUrl
+      imageUrl // Hanya menyimpan URL dari Cloudinary
     });
 
     res.redirect('/');
@@ -81,6 +97,64 @@ app.post('/addProject', upload.single('uploadImage'), async (req, res) => {
     res.status(500).send('An error occurred while saving the project.');
   }
 });
+
+// Fungsi untuk menghapus file lokal
+const deleteLocalFile = (filePath) => {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error('Error deleting local file:', err);
+    } else {
+      console.log('Local file deleted:', filePath);
+    }
+  });
+};
+
+// Route untuk mengupdate proyek
+app.put('/api/projects/:id', upload.single('uploadImage'), async (req, res) => {
+  const projectId = parseInt(req.params.id, 10);
+  const { projectName, startDate, endDate, description, technologies } = req.body;
+
+  try {
+    // Temukan proyek berdasarkan ID
+    const project = await Project.findByPk(projectId);
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
+
+    // Hapus gambar lama dari Cloudinary jika ada
+    if (project.imageUrl) {
+      const oldPublicId = project.imageUrl.split('/').slice(-2).join('/').split('.')[0];
+      await deleteImageFromCloudinary(oldPublicId);
+    }
+
+    // Update proyek dengan data baru
+    project.projectName = projectName;
+    project.startDate = startDate;
+    project.endDate = endDate;
+    project.description = description;
+    project.technologies = JSON.parse(technologies);
+
+    // Jika ada gambar baru diupload, update image URL
+    if (req.file) {
+      const newImageUrl = await uploadImageToCloudinary(req.file.path); // Upload gambar baru ke Cloudinary
+      project.imageUrl = newImageUrl;
+      // Hapus file lokal setelah upload ke Cloudinary
+      deleteLocalFile(req.file.path);
+    }
+
+    // Simpan perubahan
+    await project.save();
+
+    res.status(200).send('Project updated successfully');
+  } catch (error) {
+    console.error('Error updating project:', error);
+    res.status(500).send('An error occurred while updating the project.');
+  }
+});
+
+//--------------FILE YANG DI UPLOAD KE CLOUD--------------//
+
+
 
 // Route to get all projects
 app.get('/api/projects', async (req, res) => {
@@ -93,10 +167,23 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-// Route to delete a project
+//---------------
 app.delete('/api/projects/:id', async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
   try {
+    // Temukan proyek berdasarkan ID
+    const project = await Project.findByPk(projectId);
+
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
+
+    // Hapus gambar dari Cloudinary jika ada
+    if (project.imageUrl) {
+      const publicId = project.imageUrl.split('/').slice(-2).join('/').split('.')[0];
+      await deleteImageFromCloudinary(publicId);
+    }
+
     // Hapus proyek dari database
     await Project.destroy({ where: { id: projectId } });
     res.status(200).send('Project deleted successfully');
@@ -105,6 +192,9 @@ app.delete('/api/projects/:id', async (req, res) => {
     res.status(500).send('An error occurred while deleting the project.');
   }
 });
+
+//--------------
+
 
 
 // Route untuk mendapatkan proyek berdasarkan ID

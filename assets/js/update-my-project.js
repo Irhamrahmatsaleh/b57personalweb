@@ -1,5 +1,4 @@
 
-
 // Ambil parameter ID dari URL
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = urlParams.get('editId');
@@ -44,6 +43,9 @@ async function loadProjectData(projectId) {
 async function saveProjectData(event) {
   event.preventDefault(); // Mencegah reload halaman
 
+  // Tampilkan animasi loading
+  document.getElementById('loading').style.display = 'flex';
+
   const projectName = document.getElementById('projectName').value;
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;
@@ -70,13 +72,16 @@ async function saveProjectData(event) {
     });
 
     if (response.ok) {
-      alert('Project updated successfully!');
-      window.location.href = '/'; // Kembali ke halaman utama setelah update
+      // Redirect setelah sukses, tanpa alert
+      window.location.href = '/';
     } else {
       alert('Failed to update project');
     }
   } catch (error) {
     console.error('Error updating project:', error);
+  } finally {
+    // Sembunyikan animasi loading
+    document.getElementById('loading').style.display = 'none';
   }
 }
 
@@ -88,4 +93,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Pasang event listener untuk form submit
   document.getElementById('projectForm').addEventListener('submit', saveProjectData);
+});
+
+
+//-------------------------
+// Menampilkan preview gambar
+document.getElementById('uploadImage').addEventListener('change', function () {
+  const file = this.files[0];
+  const reader = new FileReader();
+  const imagePreview = document.getElementById('imagePreview');
+
+  reader.onload = function (e) {
+    imagePreview.src = e.target.result;
+    imagePreview.style.display = 'block'; // Tampilkan gambar
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    imagePreview.style.display = 'none'; // Sembunyikan gambar jika tidak ada file
+  }
 });

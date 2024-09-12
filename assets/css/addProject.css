@@ -1,169 +1,228 @@
-    body {
-      font-family: 'Arial', sans-serif;
-    }
+body {
+  font-family: 'Arial', sans-serif;
+}
 
-    .navbar {
-      margin-bottom: 30px;
-    }
+.navbar {
+  margin-bottom: 30px;
+}
 
-    .nav-link {
-      position: relative;
-      text-decoration: none;
-    }
+.nav-link {
+  position: relative;
+  text-decoration: none;
+}
 
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: white;
-      /* Warna garis bawah */
-      transition: width 0.3s ease;
-      /* Animasi garis bawah */
-    }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  /* Warna garis bawah */
+  transition: width 0.3s ease;
+  /* Animasi garis bawah */
+}
 
-    .nav-link:hover::after {
-      width: 100%;
-      /* Lebar garis bawah saat hover */
-    }
+.nav-link:hover::after {
+  width: 100%;
+  /* Lebar garis bawah saat hover */
+}
 
-    /*  */
+/*  */
 
-    .form-section {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+.form-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-    .form-section h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 2rem;
-      color: #333;
-    }
+.form-section h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
 
-    .form-section label {
-      font-weight: bold;
-      margin-bottom: 8px;
-      display: block;
-    }
+.form-section label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
 
-    .form-section input,
-    .form-section textarea {
-      width: 100%;
-      background-color: #f4f4f4;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
+.form-section input,
+.form-section textarea {
+  width: 100%;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
 
-    .form-section .date-inputs {
-      display: flex;
-      gap: 15px;
-    }
+.form-section .date-inputs {
+  display: flex;
+  gap: 15px;
+}
 
-    .form-section .date-inputs>div {
-      flex: 1;
-    }
+.form-section .date-inputs>div {
+  flex: 1;
+}
 
-    .form-section .tech-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+.form-section .tech-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 
-    .form-section .tech-checkboxes>div {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+.form-section .tech-checkboxes>div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
-    .form-section .file-upload {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.form-section .file-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .form-section .file-upload input {
-      flex: 1;
-    }
+.form-section .file-upload input {
+  flex: 1;
+}
 
-    .form-section button {
-      width: 20%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+.form-section button {
+  width: 20%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
 
-    @media (max-width: 767px) {
-      .form-section .date-inputs {
-        flex-direction: column;
-      }
+@media (max-width: 767px) {
+  .form-section .date-inputs {
+    flex-direction: column;
+  }
 
-      .form-section .date-inputs>div {
-        margin-bottom: 10px;
-      }
-    }
+  .form-section .date-inputs>div {
+    margin-bottom: 10px;
+  }
+}
 
-    .tech-checkboxes {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      /* Tiga kolom untuk desktop */
-      gap: 20px;
-    }
+.tech-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Tiga kolom untuk desktop */
+  gap: 20px;
+}
 
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      background-color: #f8f9fa;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.2s ease;
-    }
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
 
-    .checkbox-item:hover {
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+.checkbox-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-    .checkbox-item input[type="checkbox"] {
-      margin-right: 10px;
-      width: 20px;
-      /* Ukuran checkbox lebih besar dan presisi */
-      height: 20px;
-      /* Ukuran checkbox lebih besar dan presisi */
-      cursor: pointer;
-    }
+.checkbox-item input[type="checkbox"] {
+  margin-right: 10px;
+  width: 20px;
+  /* Ukuran checkbox lebih besar dan presisi */
+  height: 20px;
+  /* Ukuran checkbox lebih besar dan presisi */
+  cursor: pointer;
+}
 
-    .checkbox-item label {
-      font-weight: 500;
-      color: #343a40;
-      font-size: 1rem;
-    }
+.checkbox-item label {
+  font-weight: 500;
+  color: #343a40;
+  font-size: 1rem;
+}
 
-    @media (max-width: 768px) {
-      .tech-checkboxes {
-        grid-template-columns: repeat(2, 1fr);
-        /* Dua kolom untuk mobile */
-      }
-    }
+@media (max-width: 768px) {
+  .tech-checkboxes {
+    grid-template-columns: repeat(2, 1fr);
+    /* Dua kolom untuk mobile */
+  }
+}
 
-    @media (max-width: 576px) {
-      .tech-checkboxes {
-        grid-template-columns: 1fr;
-        /* Satu kolom untuk layar sangat kecil */
-      }
-    }
+@media (max-width: 576px) {
+  .tech-checkboxes {
+    grid-template-columns: 1fr;
+    /* Satu kolom untuk layar sangat kecil */
+  }
+}
+
+
+/* proccessing... */
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 9999;
+  flex-direction: column;
+  text-align: center;
+}
+
+.spinner {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 24px;
+  font-weight: bold;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
