@@ -10,20 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-// const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
+const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
 
-// Ambil URL database dari environment variable
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  protocol: 'postgres',
-  logging: false, // Nonaktifkan logging untuk produksi
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  }
-});
 
 
 
