@@ -42,7 +42,7 @@ async function loadProjects() {
             <!-- Tombol Edit dan Delete -->
             <div>
               <button class="btn btn-warning edit btn-sm" data-id="${project.id}">Edit</button>
-              <button class="btn btn-danger delete btn-sm" data-id="${project.id}">Delete</button>
+              <button  class="btn btn-danger delete btn-sm" data-id="${project.id}">Delete</button>
             </div>
           </div>
         </div>
@@ -56,16 +56,21 @@ async function loadProjects() {
 
       projectContainer.appendChild(card);
     });
-
+    //-------------------------------------------
     // Event listener untuk tombol Delete
     document.querySelectorAll('.delete').forEach(button => {
       button.addEventListener('click', function (e) {
         e.stopPropagation();
         const projectId = this.dataset.id;
-        deleteProject(projectId);
+
+        // Tampilkan dialog konfirmasi
+        const isConfirmed = window.confirm("Are you sure you want to delete this project?");
+        if (isConfirmed) {
+          deleteProject(projectId);
+        }
       });
     });
-
+    //---------------------------------------------
     // Event listener untuk tombol Edit
     document.querySelectorAll('.edit').forEach(button => {
       button.addEventListener('click', function (e) {
@@ -88,10 +93,7 @@ function getProjectDuration(startDate, endDate) {
   return `${duration} months`;
 }
 
-// // Fungsi untuk menghapus proyek
-// function deleteProject(projectId) {
-//   // Implementasikan fungsi untuk menghapus proyek dari server jika diperlukan
-// }
+//---------------------------------
 // Fungsi untuk menghapus proyek
 async function deleteProject(projectId) {
   try {

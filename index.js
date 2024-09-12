@@ -154,8 +154,6 @@ app.put('/api/projects/:id', upload.single('uploadImage'), async (req, res) => {
 
 //--------------FILE YANG DI UPLOAD KE CLOUD--------------//
 
-
-
 // Route to get all projects
 app.get('/api/projects', async (req, res) => {
   try {
@@ -175,7 +173,7 @@ app.delete('/api/projects/:id', async (req, res) => {
     const project = await Project.findByPk(projectId);
 
     if (!project) {
-      return res.status(404).send('Project not found');
+      return res.status(404).json({ success: false, message: 'Project not found' });
     }
 
     // Hapus gambar dari Cloudinary jika ada
@@ -186,16 +184,14 @@ app.delete('/api/projects/:id', async (req, res) => {
 
     // Hapus proyek dari database
     await Project.destroy({ where: { id: projectId } });
-    res.status(200).send('Project deleted successfully');
+    res.status(200).json({ success: true, message: 'Project deleted successfully' });
   } catch (error) {
     console.error('Error deleting project:', error);
-    res.status(500).send('An error occurred while deleting the project.');
+    res.status(500).json({ success: false, message: 'An error occurred while deleting the project.' });
   }
 });
 
 //--------------
-
-
 
 // Route untuk mendapatkan proyek berdasarkan ID
 app.get('/api/projects/:id', async (req, res) => {
