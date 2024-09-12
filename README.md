@@ -70,7 +70,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 Welcome to Personal Web!
-In this Blog-like app you could do amazing things such as :
+In this Personal Web app you could do amazing things such as :
 <ol>
 <li>See my profile card</li>
 
