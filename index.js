@@ -10,7 +10,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
+// const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
+const sequelize = new Sequelize('postgres://default:zveoVihu7r2A@ep-floral-sea-a1axbcq6.ap-southeast-1.aws.neon.tech:5432/verceldb', {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // Jangan lupa untuk menambahkan ini jika ssl diperlukan
+    }
+  }
+});
+
 
 // Define Project model
 const Project = sequelize.define('Project', {
