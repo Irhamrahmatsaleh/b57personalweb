@@ -2,18 +2,36 @@
 const express = require('express');
 const path = require('path');
 const { engine } = require('express-handlebars');
-const multer = require('multer');
+const multer = require('multer');;
 const { Sequelize, DataTypes } = require('sequelize');
 const { uploadImageToCloudinary, deleteImageFromCloudinary } = require('./uploads/cloudinaryUpload');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const sessionStore = require('connect-session-sequelize')(session.Store);
+const cloudinary = require('cloudinary').v2;
+const { Pool } = require('pg');
 const fs = require('fs');
+
+// Config Cloudinary
+cloudinary.config({
+  cloud_name: 'dtrvk6quc',
+  api_key: '821251785956655',
+  api_secret: 'r8lCkMbSWNdi-c-hYpGaRMKW6Og'
+});
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
 const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
 
-
-
+// Define User and Project models
+const User = sequelize.define('User', {
+  name: DataTypes.STRING,
+  email: { type: DataTypes.STRING, unique: true },
+  password: DataTypes.STRING,
+  imageUrl: DataTypes.STRING
+});
 
 // Define Project model
 const Project = sequelize.define('Project', {
@@ -29,6 +47,17 @@ const Project = sequelize.define('Project', {
 sequelize.sync()
   .then(() => console.log('Database synchronized'))
   .catch(err => console.error('Database synchronization error:', err));
+
+// Setup session
+const sessionStoreInstance = new sessionStore({
+  db: sequelize,
+});
+app.use(session({
+  secret: 'yourSecretKey',
+  resave: false,
+  saveUninitialized: true,
+  store: sessionStoreInstance,
+}));
 
 // Setup multer for file uploads
 const storage = multer.diskStorage({
@@ -55,15 +84,89 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use('/uploads', express.static('uploads'));
 
 // Routes
-app.get('/', (req, res) => {
-  res.render('index');
+// app.get('/', (req, res) => {
+//   res.render('index');
+// });
+// Route untuk halaman home
+app.get('/', async (req, res) => {
+  const projects = await Project.findAll();
+  res.render('index', {
+    projects,
+    userName: req.session.userName
+  });
+});
+//---------LOGIN AND REGISTER---------//
+// Route untuk halaman register
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+// Route untuk menangani register
+app.post('/register', upload.single('imageUrl'), async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const imageUrl = req.file ? (await cloudinary.uploader.upload_stream(req.file.buffer)).secure_url : null;
+
+    await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      imageUrl
+    });
+
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).send('An error occurred while registering the user.');
+  }
 });
 
+// Route untuk halaman login
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+// Route untuk menangani login
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).send('Invalid credentials');
+    }
+
+    req.session.userId = user.id;
+    req.session.userName = user.name;
+    res.redirect('/');
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).send('An error occurred while logging in.');
+  }
+});
+// Route untuk logout
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.status(500).send('An error occurred while logging out.');
+    }
+    res.redirect('/');
+  });
+});
+// Middleware untuk cek user login
+const isAuthenticated = (req, res, next) => {
+  if (req.session.userId) {
+    return next();
+  }
+  res.redirect('/login');
+};
+//---------LOGIN AND REGISTER---------//
 app.get('/addProject', (req, res) => {
-  res.render('addProject');
+  res.render('addProject', {
+    userName: req.session.userName,
+    isAddProjectOrDetailOrUpdate: true
+  });
 });
 //--------------FILE YANG DI UPLOAD KE CLOUD--------------//
-app.post('/addProject', upload.single('uploadImage'), async (req, res) => {
+app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (req, res) => {
   try {
     const { projectName, startDate, endDate, description, technologies } = req.body;
     let imageUrl = null;
@@ -113,7 +216,7 @@ const deleteLocalFile = (filePath) => {
 };
 
 // Route untuk mengupdate proyek
-app.put('/api/projects/:id', upload.single('uploadImage'), async (req, res) => {
+app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
   const { projectName, startDate, endDate, description, technologies } = req.body;
 
@@ -169,7 +272,7 @@ app.get('/api/projects', async (req, res) => {
 });
 
 //---------------
-app.delete('/api/projects/:id', async (req, res) => {
+app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
   try {
     // Temukan proyek berdasarkan ID

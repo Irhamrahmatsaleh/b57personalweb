@@ -1,0 +1,29 @@
+ body {
+   background-color: #f8f9fa;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+ }
+
+ .container {
+   max-width: 400px;
+   margin: auto;
+   padding: 20px;
+ }
+
+ form {
+   background: #ffffff;
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+
+ h2 {
+   margin-bottom: 30px;
+   font-size: 1.75rem;
+   color: #333;
+ }
+
+ footer {
+   margin-top: auto;
+ }

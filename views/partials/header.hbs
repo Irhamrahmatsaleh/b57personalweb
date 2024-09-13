@@ -12,11 +12,30 @@
           <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" href="/addProject">Add
-            Project</a>
+          <a class="nav-link active fw-bold text-white" style="margin-left: 15px;" href="/addProject">Add Project</a>
         </li>
       </ul>
-      <a class="btn btn-dark bg-success" href="/contact">Contact Me</a>
+      <!-- Bagian kanan navbar -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        {{#if userName}}
+        <li class="nav-item">
+          <span class="nav-link active fw-bold text-white" style="margin-right: 15px;">Hello, {{userName}}</span>
+        </li>
+        <li class="nav-item" style="list-style-type: none; margin-right: 15px;">
+          <a class="btn btn-dark bg-transparent" href="/logout">Logout</a>
+        </li>
+        {{else}}
+        <li class="nav-item" style="list-style-type: none; margin-right: 15px;">
+          <a class="btn btn-dark bg-transparent" href="/login">Login</a>
+        </li>
+        <li class="nav-item" style="list-style-type: none; margin-right: 15px;">
+          <a class="btn btn-dark bg-transparent" href="/register">Register</a>
+        </li>
+        {{/if}}
+        <li class="nav-item">
+          <a class="btn btn-dark bg-dark.bg-gradient" href="/contact">Contact Me</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav><br>
