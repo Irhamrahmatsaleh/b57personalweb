@@ -22,7 +22,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
+// const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
+const sequelize = new Sequelize('postgres://default:9iLBHb4hpXNr@ep-frosty-night-a4dht1wi.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require', {
+  dialect: 'postgres',
+  logging: false // Set to true if you want to see SQL queries in the console
+});
 
 // Define User and Project models
 const User = sequelize.define('User', {
