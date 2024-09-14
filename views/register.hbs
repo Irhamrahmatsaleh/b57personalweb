@@ -31,6 +31,12 @@
         <label for="image" class="form-label">Profile Image</label>
         <input type="file" class="form-control" id="image" name="imageUrl">
       </div>
+      <!-- Error message for user already exists -->
+      {{#if errorMessage}}
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+      {{/if}}
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-success">Register</button>
       </div>

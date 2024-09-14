@@ -23,6 +23,12 @@
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
       </div>
+      <!-- Error message for wrong email/password -->
+      {{#if errorMessage}}
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+      {{/if}}
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-success">Login</button>
       </div>

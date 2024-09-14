@@ -1,4 +1,5 @@
 const cloudinary = require('cloudinary').v2;
+const path = require('path');
 
 // Konfigurasi Cloudinary
 cloudinary.config({
@@ -20,6 +21,22 @@ const uploadImageToCloudinary = (filePath) => {
   });
 };
 
+// Fungsi untuk upload user profile
+const uploadToCloudinary = (filePath, folder) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      filePath,
+      { folder: folder },
+      (error, result) => {
+        if (result) {
+          resolve(result.secure_url); // Mengembalikan URL secure dari Cloudinary
+        } else {
+          reject(error);
+        }
+      }
+    );
+  });
+};
 // Fungsi untuk menghapus gambar dari Cloudinary
 const deleteImageFromCloudinary = (publicId) => {
   return new Promise((resolve, reject) => {
@@ -35,4 +52,30 @@ const deleteImageFromCloudinary = (publicId) => {
   });
 };
 
-module.exports = { uploadImageToCloudinary, deleteImageFromCloudinary };
+// update image
+// Fungsi upload
+const uploadImage = (filePath) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(filePath, { cache: "no-cache" }, (error, result) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(result);
+    });
+  });
+};
+
+// Fungsi untuk menghapus gambar dari Cloudinary
+const deleteImage = (publicId) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.destroy(publicId, (error, result) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(result);
+    });
+  });
+};
+
+
+module.exports = { uploadImageToCloudinary, deleteImageFromCloudinary, uploadToCloudinary, uploadImage, deleteImage };

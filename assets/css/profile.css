@@ -1,0 +1,75 @@
+/* Profile page styles */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profile-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  /* Add border-radius to the top corners */
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Footer style to ensure it stays at the bottom */
+footer {
+  margin-top: auto;
+}
+
+/* Styling for the profile heading */
+h1.mb-4 {
+  text-align: center;
+  margin-bottom: 40px;
+  /* Add bottom margin to space out from the card */
+  margin-top: -2px;
+  /* Add top margin to space out from the top of the page */
+}
