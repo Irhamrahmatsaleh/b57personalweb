@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "index.js"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "postgres://default:9iLBHb4hpXNr@ep-frosty-night-a4dht1wi.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
-  }
+  ]
 }
