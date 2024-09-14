@@ -1,3 +1,4 @@
+require('dotenv').config();
 {
   "development": {
     "username": "postgres",
