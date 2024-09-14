@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const sessionStore = require('connect-session-sequelize')(session.Store);
 const cloudinary = require('cloudinary').v2;
-// const { Pool } = require('pg');
+ const { Pool } = require('pg');
 const fs = require('fs');
 
 // Config Cloudinary
@@ -23,7 +23,8 @@ const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
  const sequelize = new Sequelize("postgres://default:9iLBHb4hpXNr@ep-frosty-night-a4dht1wi.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require");
-// Gunakan variabel lingkungan untuk URL database
+
+
 // Define User and Project models
 const User = sequelize.define('User', {
   name: DataTypes.STRING,
