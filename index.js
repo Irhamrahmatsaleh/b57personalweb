@@ -39,7 +39,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-const sequelize = new Sequelize("postgres://default:9iLBHb4hpXNr@ep-frosty-night-a4dht1wi.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require");
+const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
 
 // Define User and Project models
 const User = sequelize.define('User', {
@@ -272,7 +272,6 @@ app.get('/api/projects/:id', async (req, res) => {
     res.status(500).send('An error occurred while fetching the project.');
   }
 });
-
 
 app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
