@@ -11,6 +11,7 @@ const sessionStore = require('connect-session-sequelize')(session.Store);
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const streamifier = require('streamifier');
+const { Pool } = require('pg');
 require('dotenv').config();
 
 // Config Cloudinary
@@ -49,6 +50,24 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     }
   }
 });
+
+// Membuat pool koneksi
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+// Menggunakan pool untuk query
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('Database query error:', err);
+  } else {
+    console.log('Database connection successful:', res.rows[0]);
+  }
+});
+
 // const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres')
 // Define User and Project models
 const User = sequelize.define('User', {
