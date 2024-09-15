@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('projectForm').addEventListener('submit', saveProjectData);
 });
 
-
 //-------------------------
 // Menampilkan preview gambar
 document.getElementById('uploadImage').addEventListener('change', function () {
