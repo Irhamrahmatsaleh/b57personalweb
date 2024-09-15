@@ -39,7 +39,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-const sequelize = new Sequelize("postgres://default:Aci2ehu0zCwY@ep-dawn-snowflake-a1sihk4d.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require");
+const sequelize = new Sequelize("postgres://default:5ZiMYNlOe0Hy@ep-nameless-rain-a13l819n.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require");
 
 // const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres')
 // Define User and Project models
