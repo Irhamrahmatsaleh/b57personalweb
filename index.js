@@ -39,7 +39,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+// const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres', // Menentukan dialect yang digunakan
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Hanya jika Anda menggunakan SSL di server PostgreSQL Anda
+    }
+  }
+});
 // const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres')
 // Define User and Project models
 const User = sequelize.define('User', {
