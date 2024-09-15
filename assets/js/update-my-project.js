@@ -75,7 +75,7 @@ async function saveProjectData(event) {
       // Redirect setelah sukses, tanpa alert
       window.location.href = '/';
     } else {
-      alert('Belum bisa update untuk saat ini');
+      alert('Harap login untuk memperbarui proyek');
     }
   } catch (error) {
     console.error('Error updating project:', error);

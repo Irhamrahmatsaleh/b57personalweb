@@ -57,6 +57,28 @@ async function loadProjects() {
       projectContainer.appendChild(card);
     });
     //-------------------------------------------
+    // Fungsi untuk menghapus project
+    async function deleteProject(projectId) {
+      try {
+        const response = await fetch(`/api/projects/${projectId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.status === 204) {
+          // Project berhasil dihapus, perbarui UI atau redirect jika perlu
+          alert('Project deleted successfully');
+          window.location.reload(); // Refresh halaman untuk memperbarui daftar project
+        } else {
+          const errorMessage = await response.text();
+          alert(`Failed to delete project: ${errorMessage}`);
+          // alert(`Anda tidak bisa menghapus proyek orang lain`)
+        }
+      } catch (error) {
+        console.error('Error deleting project:', error);
+        alert('An error occurred while deleting the project.');
+      }
+    }
+
     // Event listener untuk tombol Delete
     document.querySelectorAll('.delete').forEach(button => {
       button.addEventListener('click', function (e) {
@@ -70,6 +92,9 @@ async function loadProjects() {
         }
       });
     });
+
+
+
     //---------------------------------------------
     // Event listener untuk tombol Edit
     document.querySelectorAll('.edit').forEach(button => {

@@ -16,9 +16,9 @@ require('dotenv').config();
 
 // Config Cloudinary
 cloudinary.config({
-  cloud_name: 'dtrvk6quc',
-  api_key: '821251785956655',
-  api_secret: 'r8lCkMbSWNdi-c-hYpGaRMKW6Og'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 // Fungsi untuk meng-upload ke Cloudinary dari buffer
@@ -169,6 +169,19 @@ app.get('/register', (req, res) => {
 app.post('/register', upload.single('imageUrl'), async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
+    // Cek apakah email sudah ada di database
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      // Kirim pesan error jika email sudah terdaftar
+      return res.render('register', {
+        errorMessage: 'Email already exists',
+        name, // Mengisi kembali form dengan data sebelumnya
+        email
+      });
+    }
+
+    // Jika email belum ada, lanjutkan proses registrasi
     const hashedPassword = await bcrypt.hash(password, 10);
 
     let imageUrl = null;
@@ -177,6 +190,7 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
       imageUrl = result.secure_url;
     }
 
+    // Simpan user ke database
     await User.create({
       name,
       email,
@@ -184,12 +198,14 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
       imageUrl
     });
 
+    // Redirect ke halaman login setelah sukses registrasi
     res.redirect('/login');
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).send('An error occurred while registering the user.');
   }
 });
+
 
 // Route untuk menangani login
 app.post('/login', async (req, res) => {
@@ -257,10 +273,12 @@ app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (re
   try {
     const { projectName, startDate, endDate, description, technologies } = req.body;
     let imageUrl = null;
+    let publicId = null;
 
     if (req.file) {
       const result = await uploadToCloudinary(req.file.buffer);
       imageUrl = result.secure_url;
+      publicId = result.public_id; // Simpan public_id dari Cloudinary
     }
 
     const techArray = Array.isArray(technologies) ? technologies : [technologies];
@@ -271,7 +289,8 @@ app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (re
       endDate,
       description,
       technologies: techArray,
-      imageUrl
+      imageUrl,
+      publicId  // Simpan publicId ke database
     });
 
     res.redirect('/');
@@ -280,6 +299,7 @@ app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (re
     res.status(500).send('An error occurred while saving the project.');
   }
 });
+
 
 // Route untuk mengupdate proyek
 // Route untuk mendapatkan proyek berdasarkan ID
@@ -307,14 +327,6 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
   const projectId = parseInt(req.params.id, 10);
   const { projectName, startDate, endDate, description, technologies } = req.body;
 
-  // Logging data yang diterima untuk debugging
-  console.log('Received Data:', { projectName, startDate, endDate, description, technologies });
-  if (req.file) {
-    console.log('Received file:', req.file);
-  } else {
-    console.log('No file uploaded');
-  }
-
   try {
     // Temukan proyek berdasarkan ID
     const project = await Project.findByPk(projectId);
@@ -328,7 +340,7 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
     project.endDate = new Date(endDate);
     project.description = description;
 
-    // Coba parse technologies hanya jika diperlukan
+    // Parse technologies jika diberikan
     if (technologies) {
       try {
         project.technologies = JSON.parse(technologies); // Asumsikan technologies dikirim dalam bentuk JSON string
@@ -338,23 +350,17 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
       }
     }
 
-    // Jika ada gambar baru diupload, update image URL menggunakan streamifier
+    // Jika ada gambar baru diupload
     if (req.file) {
-      const uploadPath = path.join(__dirname, 'uploads', req.file.filename); // Tentukan lokasi untuk menyimpan file
+      // Hapus gambar lama dari Cloudinary
+      if (project.imageUrl) {
+        const oldPublicId = project.imageUrl.split('/').pop().split('.')[0];
+        await cloudinary.uploader.destroy(oldPublicId);
+      }
 
-      // Menggunakan streamifier untuk menulis buffer ke file
-      const writeStream = fs.createWriteStream(uploadPath);
-      streamifier.createReadStream(req.file.buffer).pipe(writeStream);
-
-      writeStream.on('finish', () => {
-        project.imageUrl = `/uploads/${req.file.filename}`; // Simpan URL gambar yang baru
-        console.log('Image uploaded successfully:', project.imageUrl);
-      });
-
-      writeStream.on('error', (err) => {
-        console.error('Error uploading image:', err);
-        return res.status(500).send('An error occurred while uploading the image.');
-      });
+      // Upload gambar baru ke Cloudinary
+      const result = await uploadToCloudinary(req.file.buffer);
+      project.imageUrl = result.secure_url;
     }
 
     // Simpan perubahan ke database
@@ -367,6 +373,7 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
   }
 });
 
+
 // Route untuk mendapatkan semua proyek
 app.get('/api/projects', async (req, res) => {
   try {
@@ -378,9 +385,10 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-// Route untuk menghapus proyek
+// Route untuk menghapus PROYEK
 app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
+
   try {
     const project = await Project.findByPk(projectId);
 
@@ -388,11 +396,17 @@ app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
       return res.status(404).send('Project not found');
     }
 
+    // Ekstrak publicId dari imageUrl
     if (project.imageUrl) {
-      const publicId = project.imageUrl.split('/').slice(-2).join('/').split('.')[0];
-      await cloudinary.uploader.destroy(publicId);
+      const publicId = project.imageUrl.split('/').slice(-1)[0].split('.')[0];
+      console.log("Deleting image with publicId:", publicId); // Log untuk memastikan publicId benar
+
+      // Hapus gambar dari Cloudinary
+      const result = await cloudinary.uploader.destroy(publicId);
+      console.log("Cloudinary delete response:", result); // Log untuk melihat respons Cloudinary
     }
 
+    // Hapus project dari database
     await project.destroy();
     res.status(204).send('Project deleted successfully');
   } catch (error) {
@@ -400,6 +414,8 @@ app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
     res.status(500).send('An error occurred while deleting the project.');
   }
 });
+
+
 
 // Route untuk halaman contact
 app.get('/contact', (req, res) => {

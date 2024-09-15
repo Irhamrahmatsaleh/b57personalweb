@@ -3,9 +3,9 @@ const path = require('path');
 
 // Konfigurasi Cloudinary
 cloudinary.config({
-  cloud_name: 'dtrvk6quc', // Ganti dengan cloud_name yang benar
-  api_key: '821251785956655', // Ganti dengan api_key yang benar
-  api_secret: 'r8lCkMbSWNdi-c-hYpGaRMKW6Og', // Ganti dengan api_secret yang benar
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 // Fungsi untuk upload gambar ke Cloudinary
