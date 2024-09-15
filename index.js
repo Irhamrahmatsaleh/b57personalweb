@@ -39,8 +39,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Sequelize
-const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres');
+const sequelize = new Sequelize("postgres://default:Aci2ehu0zCwY@ep-dawn-snowflake-a1sihk4d.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require");
 
+// const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres')
 // Define User and Project models
 const User = sequelize.define('User', {
   name: DataTypes.STRING,
@@ -74,6 +75,17 @@ app.use(session({
   saveUninitialized: true,
   store: sessionStoreInstance,
 }));
+sessionStoreInstance.sync();
+
+// Setup multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
 
 app.use((req, res, next) => {
   res.locals.userName = req.session.userName;
@@ -95,31 +107,36 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use('/uploads', express.static('uploads'));
 
 // Middleware untuk cek user login
-// const isAuthenticated = (req, res, next) => {
-//   if (req.session.userId) {
-//     return next();
-//   }
-//   res.redirect('/login');
-// };
-function isAuthenticated(req, res, next) {
-  if (req.session && req.session.userId) {
-    // Jika sesi valid dan user sudah login
-    console.log('User authenticated with session:', req.session);
+const isAuthenticated = (req, res, next) => {
+  if (req.session.userId) {
     return next();
-  } else {
-    // Jika tidak ada sesi yang valid, kirim status 401 (Unauthorized)
-    console.warn('User is not authenticated.');
-    return res.status(401).send('You need to log in to perform this action.');
   }
-}
+  res.redirect('/login');
+};
 
+// Route untuk halaman home
+app.get('/', async (req, res) => {
+  const projects = await Project.findAll();
+  res.render('index', {
+    projects,
+    userName: req.session.userName
+  });
+});
 
+app.get('/login', (req, res) => {
+  if (req.session.userId) {
+    return res.redirect('/');
+  }
+  res.render('login');
+});
 
-
-// Route untuk halaman register
 app.get('/register', (req, res) => {
+  if (req.session.userId) {
+    return res.redirect('/');
+  }
   res.render('register');
 });
+
 
 // Route untuk menangani register
 app.post('/register', upload.single('imageUrl'), async (req, res) => {
@@ -147,11 +164,6 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
   }
 });
 
-// Route untuk halaman login
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
 // Route untuk menangani login
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -177,15 +189,6 @@ app.post('/login', async (req, res) => {
     console.error('Error during login:', error);
     res.status(500).send('An error occurred during login');
   }
-});
-
-// Route untuk halaman home
-app.get('/', async (req, res) => {
-  const projects = await Project.findAll();
-  res.render('index', {
-    projects,
-    userName: req.session.userName
-  });
 });
 
 // Route untuk halaman profil
@@ -277,11 +280,16 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
   const projectId = parseInt(req.params.id, 10);
   const { projectName, startDate, endDate, description, technologies } = req.body;
 
-  if (isNaN(projectId)) {
-    return res.status(400).send('Invalid project ID');
+  // Logging data yang diterima untuk debugging
+  console.log('Received Data:', { projectName, startDate, endDate, description, technologies });
+  if (req.file) {
+    console.log('Received file:', req.file);
+  } else {
+    console.log('No file uploaded');
   }
 
   try {
+    // Temukan proyek berdasarkan ID
     const project = await Project.findByPk(projectId);
     if (!project) {
       return res.status(404).send('Project not found');
@@ -289,44 +297,43 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
 
     // Update proyek dengan data baru
     project.projectName = projectName;
-    project.startDate = new Date(startDate);
+    project.startDate = new Date(startDate); // Pastikan tanggal dikonversi ke Date
     project.endDate = new Date(endDate);
     project.description = description;
 
-    // Parsing technologies jika ada
+    // Coba parse technologies hanya jika diperlukan
     if (technologies) {
       try {
-        project.technologies = JSON.parse(technologies);
+        project.technologies = JSON.parse(technologies); // Asumsikan technologies dikirim dalam bentuk JSON string
       } catch (err) {
         console.error('Error parsing technologies:', err);
         return res.status(400).send('Invalid technologies format');
       }
     }
 
-    // Jika ada file gambar diupload
+    // Jika ada gambar baru diupload, update image URL menggunakan streamifier
     if (req.file) {
-      const uploadPath = path.join(__dirname, 'uploads', req.file.filename);
+      const uploadPath = path.join(__dirname, 'uploads', req.file.filename); // Tentukan lokasi untuk menyimpan file
 
       // Menggunakan streamifier untuk menulis buffer ke file
       const writeStream = fs.createWriteStream(uploadPath);
       streamifier.createReadStream(req.file.buffer).pipe(writeStream);
 
-      writeStream.on('finish', async () => {
-        project.imageUrl = `/uploads/${req.file.filename}`; // Update URL gambar yang baru
-        await project.save(); // Simpan perubahan ke database
-        console.log('Project updated successfully with image');
-        res.status(200).send('Project updated successfully');
+      writeStream.on('finish', () => {
+        project.imageUrl = `/uploads/${req.file.filename}`; // Simpan URL gambar yang baru
+        console.log('Image uploaded successfully:', project.imageUrl);
       });
 
       writeStream.on('error', (err) => {
         console.error('Error uploading image:', err);
-        res.status(500).send('An error occurred while uploading the image.');
+        return res.status(500).send('An error occurred while uploading the image.');
       });
-    } else {
-      // Jika tidak ada gambar yang diupload, simpan perubahan lainnya
-      await project.save();
-      res.status(200).send('Project updated successfully without image update');
     }
+
+    // Simpan perubahan ke database
+    await project.save();
+
+    res.status(200).send('Project updated successfully');
   } catch (error) {
     console.error('Error updating project:', error);
     res.status(500).send('An error occurred while updating the project.');
