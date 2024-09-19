@@ -9,10 +9,11 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const sessionStore = require('connect-session-sequelize')(session.Store);
 const cloudinary = require('cloudinary').v2;
-const fs = require('fs');
+const flash = require('connect-flash');
 const streamifier = require('streamifier');
 const { Pool } = require('pg');
 require('dotenv').config();
+
 
 // Config Cloudinary
 cloudinary.config({
@@ -20,6 +21,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
+
 
 // Fungsi untuk meng-upload ke Cloudinary dari buffer
 function uploadToCloudinary(buffer) {
@@ -67,8 +69,6 @@ pool.query('SELECT NOW()', (err, res) => {
     console.log('Database connection successful:', res.rows[0]);
   }
 });
-
-// const sequelize = new Sequelize('postgres://postgres:root@127.0.0.1:5432/postgres')
 // Define User and Project models
 const User = sequelize.define('User', {
   name: DataTypes.STRING,
@@ -79,11 +79,13 @@ const User = sequelize.define('User', {
 
 const Project = sequelize.define('Project', {
   projectName: DataTypes.STRING,
+  authorName: DataTypes.STRING,
   startDate: DataTypes.DATE,
   endDate: DataTypes.DATE,
   description: DataTypes.TEXT,
   technologies: DataTypes.ARRAY(DataTypes.STRING),
-  imageUrl: DataTypes.STRING
+  imageUrl: DataTypes.STRING,
+  authorId: DataTypes.INTEGER
 });
 
 // Sync database
@@ -103,16 +105,25 @@ app.use(session({
   store: sessionStoreInstance,
 }));
 sessionStoreInstance.sync();
+// Setup connect-flash
+app.use(flash());
+// Middleware untuk mengakses pesan flash di view
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
+
 
 // Setup multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'uploads/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   }
+// });
 
 app.use((req, res, next) => {
   res.locals.userName = req.session.userName;
@@ -261,6 +272,7 @@ app.get('/logout', (req, res) => {
 
 // Route untuk halaman addProject
 app.get('/addProject', isAuthenticated, (req, res) => {
+  console.log(req.session.userName);
   res.render('addProject', {
     userName: req.session.userName,
     isAddProjectOrDetailOrUpdate: true,
@@ -271,7 +283,7 @@ app.get('/addProject', isAuthenticated, (req, res) => {
 // Route untuk menambahkan project
 app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (req, res) => {
   try {
-    const { projectName, startDate, endDate, description, technologies } = req.body;
+    const { projectName, authorName, startDate, endDate, description, technologies } = req.body;
     let imageUrl = null;
     let publicId = null;
 
@@ -281,16 +293,18 @@ app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (re
       publicId = result.public_id; // Simpan public_id dari Cloudinary
     }
 
+    const authorId = req.session.userId;
     const techArray = Array.isArray(technologies) ? technologies : [technologies];
-
+    console.log(authorName);
     await Project.create({
       projectName,
+      authorName,
       startDate,
       endDate,
       description,
       technologies: techArray,
       imageUrl,
-      publicId  // Simpan publicId ke database
+      authorId,
     });
 
     res.redirect('/');
@@ -385,6 +399,13 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
+// Route untuk mendapatkan username
+app.get('/getUsername', async (req, res) => {
+  return res.json({
+    userName: req.session.userName,
+  });
+});
+
 // Route untuk menghapus PROYEK
 app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
@@ -476,6 +497,7 @@ app.get('/project-detail', async (req, res) => {
       timeDuration: calculateDuration(project.startDate, project.endDate),
       technologies: project.technologies, // Asumsikan teknologi disimpan sebagai array
       projectDescription: project.description,
+      authorName: project.authorName,
       userName: req.session.userName // Pastikan session berisi userName
     };
 
@@ -487,6 +509,106 @@ app.get('/project-detail', async (req, res) => {
   }
 });
 
+//-------------UNTUK BAGIAN PROFILE----------------------//
+app.post('/uploadProfileImage', isAuthenticated, upload.single('imageUrl'), async (req, res) => {
+  try {
+    // Temukan user berdasarkan sesi login
+    const user = await User.findByPk(req.session.userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Hapus gambar lama dari Cloudinary
+    if (user.imageUrl) {
+      const oldPublicId = user.imageUrl.split('/').pop().split('.')[0];
+      await cloudinary.uploader.destroy(oldPublicId);
+    }
+
+    // Upload gambar baru ke Cloudinary
+    const result = await uploadToCloudinary(req.file.buffer);
+    user.imageUrl = result.secure_url;
+
+    // Simpan perubahan di database
+    await user.save();
+
+    res.redirect('/profile'); // Redirect kembali ke halaman profil setelah berhasil diupload
+  } catch (error) {
+    console.error('Error uploading profile image:', error);
+    res.status(500).send('An error occurred while uploading the image.');
+  }
+});
+
+app.get('/deleteImageProfile', isAuthenticated, async (req, res) => {
+  try {
+    // Temukan user berdasarkan sesi login
+    const user = await User.findByPk(req.session.userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Hapus gambar dari Cloudinary
+    if (user.imageUrl) {
+      const oldPublicId = user.imageUrl.split('/').pop().split('.')[0];
+      await cloudinary.uploader.destroy(oldPublicId);
+    }
+
+    // Setel URL gambar menjadi null di database
+    user.imageUrl = null;
+    await user.save();
+
+    res.redirect('/profile'); // Redirect ke halaman profil setelah gambar dihapus
+  } catch (error) {
+    console.error('Error deleting profile image:', error);
+    res.status(500).send('An error occurred while deleting the image.');
+  }
+});
+
+
+app.post('/editProfile', isAuthenticated, async (req, res) => {
+  const { userName, email, oldPassword } = req.body;
+
+  try {
+    const user = await User.findByPk(req.session.userId);
+    if (!user) {
+      req.flash('error_msg', 'User not found');
+      return res.redirect('/profile');
+    }
+
+    // Verifikasi password lama
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      req.flash('error_msg', 'Incorrect old password');
+      return res.redirect('/profile'); // Kembalikan ke halaman profil dengan pesan error
+    }
+
+    // Update nama dan email user
+    if (userName) {
+      user.name = userName;
+    }
+
+    if (email) {
+      user.email = email;
+    }
+
+    // Simpan perubahan di database
+    await user.save();
+
+    await Project.update(
+      { authorName: userName },
+      { where: { authorId: user.id } }
+    );
+
+    req.flash('success_msg', 'Profile updated successfully');
+    res.redirect('/profile'); // Redirect ke halaman profil setelah update
+  } catch (error) {
+    console.error('Error editing profile:', error);
+    req.flash('error_msg', 'An error occurred while editing the profile.');
+    res.redirect('/profile');
+  }
+});
+
+
+//-------------UNTUK BAGIAN PROFILE----------------------//
 
 // Start the server
 app.listen(PORT, () => {

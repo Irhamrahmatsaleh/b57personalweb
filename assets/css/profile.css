@@ -5,15 +5,15 @@ body {
   min-height: 100vh;
 }
 
-.container {
+.profile-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.profile-card {
-  width: 100%;
+.card {
+  width: 95%;
   max-width: 400px;
   border-radius: 10px;
   overflow: hidden;
@@ -34,17 +34,17 @@ body {
   /* Add border-radius to the top corners */
 }
 
-.card-body {
+.profile-card-body {
   text-align: center;
 }
 
-.card-title {
+.profile-card-title {
   margin-bottom: 10px;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.card-text {
+.profile-card-text {
   margin-bottom: 20px;
   font-size: 1rem;
   color: #555;
@@ -61,8 +61,15 @@ body {
 }
 
 /* Footer style to ensure it stays at the bottom */
-footer {
+/* footer {
   margin-top: auto;
+} */
+footer {
+  background: #f8f9fa;
+  /* Sesuaikan dengan warna footer Anda */
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
 }
 
 /* Styling for the profile heading */

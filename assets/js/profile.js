@@ -14,51 +14,54 @@ async function loadProjects(userName) {
 
     // Menampilkan proyek yang diambil dari server
     projects.forEach((project) => {
-      const card = document.createElement('div');
-      card.classList.add('card', 'col-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'm-2', 'p-0', 'shadow-sm');
 
-      // Batasi deskripsi yang ditampilkan hanya 100 karakter
-      const shortDescription = project.description.length > 100
-        ? project.description.substring(0, 100) + '...'
-        : project.description;
+      if (project.authorName == userName) {
+        const card = document.createElement('div');
+        card.classList.add('card', 'col-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'm-2', 'p-0', 'shadow-sm');
 
-      card.innerHTML = `
-        <img src="${project.imageUrl}" class="card-img-top" alt="Project Image">
-        <div class="card-body shadow">
+        // Batasi deskripsi yang ditampilkan hanya 100 karakter
+        const shortDescription = project.description.length > 100
+          ? project.description.substring(0, 100) + '...'
+          : project.description;
+
+        card.innerHTML = `
+            <img src="${project.imageUrl}" class="card-img-top" alt="Project Image">
+            <div class="card-body shadow">
             <h2 class="card-title h5">${project.projectName} </h2>
             <p class="card-text">${new Date(project.startDate).getFullYear()}</p>
-          <p class="card-text">Duration: ${getProjectDuration(project.startDate, project.endDate)}</p>
-          <p class="card-text">${shortDescription}</p> <!-- Tampilkan deskripsi pendek -->
-          <p class="card-text"><strong>Author: </strong>${project.authorName}</p>
-          <div class="icons mb-3">
-            ${project.technologies.map(tech => `<i class="fab fa-${tech.toLowerCase()} mx-1"></i>`).join('')}
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <!-- Ikon tambahan -->
-            <div style="font-size: 20px;">
-              <i class="fab fa-google-play mx-2" style="color: green;"></i> <!-- Play Store Icon -->
-              <i class="fab fa-android mx-2" style="color: lime;"></i> <!-- Android Icon -->
-              <i class="fab fa-java mx-2" style="color: orange;"></i> <!-- Java Icon -->
+            <p class="card-text">Duration: ${getProjectDuration(project.startDate, project.endDate)}</p>
+            <p class="card-text">${shortDescription}</p> <!-- Tampilkan deskripsi pendek -->
+            <p class="card-text"><strong>Author: </strong>${project.authorName}</p>
+            <div class="icons mb-3">
+                ${project.technologies.map(tech => `<i class="fab fa-${tech.toLowerCase()} mx-1"></i>`).join('')}
             </div>
-            <!-- Tombol Edit dan Delete -->
-            <div>
-            ${project.authorName === userName ? `
-                <button class="btn btn-warning edit btn-sm" data-id="${project.id}">Edit</button>
-                <button class="btn btn-danger delete btn-sm" data-id="${project.id}">Delete</button>
-              ` : ''
-        }
+            <div class="d-flex justify-content-between align-items-center">
+                <!-- Ikon tambahan -->
+                <div style="font-size: 20px;">
+                <i class="fab fa-google-play mx-2" style="color: green;"></i> <!-- Play Store Icon -->
+                <i class="fab fa-android mx-2" style="color: lime;"></i> <!-- Android Icon -->
+                <i class="fab fa-java mx-2" style="color: orange;"></i> <!-- Java Icon -->
+                </div>
+                <!-- Tombol Edit dan Delete -->
+                <div>
+                ${project.authorName === userName ? `
+                    <button class="btn btn-warning edit btn-sm" data-id="${project.id}">Edit</button>
+                    <button class="btn btn-danger delete btn-sm" data-id="${project.id}">Delete</button>
+                ` : ''
+          }
+                </div>
             </div>
-          </div>
-        </div>
-      `;
+            </div>
+        `;
 
-      card.addEventListener('click', function (e) {
-        if (!e.target.classList.contains('edit') && !e.target.classList.contains('delete')) {
-          window.location.href = `project-detail?id=${project.id}`;
-        }
-      });
+        card.addEventListener('click', function (e) {
+          if (!e.target.classList.contains('edit') && !e.target.classList.contains('delete')) {
+            window.location.href = `project-detail?id=${project.id}`;
+          }
+        });
 
-      projectContainer.appendChild(card);
+        projectContainer.appendChild(card);
+      }
     });
     //-------------------------------------------
     // Fungsi untuk menghapus project

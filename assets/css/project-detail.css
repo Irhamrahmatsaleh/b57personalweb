@@ -90,6 +90,7 @@ body {
   color: #495057;
 }
 
+
 @media (max-width: 768px) {
   .image-and-info {
     flex-direction: column;

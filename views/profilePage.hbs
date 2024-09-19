@@ -13,7 +13,7 @@
 <body>
   {{> header}} <!-- Include the header partial -->
 
-  <div class="container mt-5 pt-5">
+  <div class="profile-container mt-5 pt-5">
     <h1 class="mb-4">Profile</h1>
     <div class="card profile-card mx-auto">
       <form action="/uploadProfileImage" method="post" enctype="multipart/form-data">
@@ -22,24 +22,111 @@
         </label>
         <input type="file" id="fileInput" name="imageUrl" style="display: none;" onchange="this.form.submit();">
         <div class="card-body">
-          <h5 class="card-title">{{userName}}</h5>
-          <p class="card-text">{{email}}</p>
+          <h5 class="profile-card-title">{{userName}}</h5>
+          <p class="profile-card-text">{{email}}</p>
           <!-- Tombol untuk menghapus gambar -->
           <a href="/deleteImageProfile" class="btn btn-danger mt-0">Delete Image</a>
-          <a href="/editProfile" class="btn btn-primary">Edit Profile</a>
+          {{!-- <a href="/editProfile" class="btn btn-primary">Edit Profile</a> --}}
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit
+            Profile</button>
         </div>
       </form>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
 
-  {{> footer}} <!-- Include the footer partial -->
+    <!-- Modal untuk edit profile -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Menampilkan pesan error jika ada -->
+            {{#if error_msg}}
+            <div class="alert alert-danger">
+              {{error_msg}}
+            </div>
+            {{/if}}
 
+            <!-- Menampilkan pesan sukses jika ada -->
+            {{#if success_msg}}
+            <div class="alert alert-success">
+              {{success_msg}}
+            </div>
+            {{/if}}
+
+            <form action="/editProfile" method="post">
+              <div class="form-group">
+                <label for="userName">Name</label>
+                <input type="text" class="form-control" id="userName" name="userName" value="{{userName}}">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+              </div>
+              <div class="mb-3">
+                <label for="oldPassword" class="form-label">Enter Old Password</label>
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- My Project Section -->
+    <section class="project-section container" style="width: 93%; height: 150%; border-radius: 10px;">
+      <h2 class="text-center my-5">{{userName}}'s Projects</h2>
+      <div class="row justify-content-center">
+        <!-- Card Example -->
+        <div class="card col-12 col-sm-6 col-md-4 col-lg-3 m-2 p-0 shadow-sm">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Project Image">
+          <div class="card-body">
+            <h2 class="card-title h5">Project Title</h2>
+            <p class="card-text">2023</p>
+            <p class="card-text">Duration: 2 months</p>
+            <p class="card-text project-description">Description of the project goes here...</p>
+            <div class="icons mb-3">
+              <i class="fab fa-android mx-1"></i>
+              <i class="fab fa-java mx-1"></i>
+              <i class="fab fa-google-play mx-1"></i>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-warning edit btn-sm">Edit</button>
+              <button class="btn btn-danger delete btn-sm">Delete</button>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards dynamically with JavaScript -->
+      </div>
+    </section>
+    {{> footer}} <!-- Include the footer partial -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+    <script src="/js/profile.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const errorMsg = '{{error_msg}}'; // Gantikan dengan data dari server
+        const successMsg = '{{success_msg}}'; // Gantikan dengan data dari server
+        const editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+
+        if (errorMsg || successMsg) {
+          editProfileModal.show();
+        }
+      });
+    </script>
 </body>
 
 </html>

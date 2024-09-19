@@ -22,6 +22,9 @@
         <label for="projectName">Project Name</label>
         <input type="text" id="projectName" name="projectName" required>
 
+        <label for="author">Author Name</label>
+        <input type="text" id="author" name="authorName" value="{{userName}}" required readonly>
+
         <div class="date-inputs">
           <div>
             <label for="startDate">Start Date</label>
@@ -70,7 +73,7 @@
           <img id="imagePreview" src="" alt="Image Preview"
             style="display:none; width: 20%; height: auto; border-radius: 7px;" />
           <div class="file-upload" style="margin-top: 10px;">
-            <input type="file" id="uploadImage" name="uploadImage" accept="image/*" required>
+            <input type="file" id="uploadImage" name="uploadImage" accept="image/*">
           </div><br>
           <div class="d-flex justify-content-end">
             <button type="submit" class="bg-success">Submit</button>

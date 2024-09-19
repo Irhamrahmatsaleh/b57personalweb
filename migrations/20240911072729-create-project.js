@@ -12,6 +12,9 @@ module.exports = {
       projectName: {
         type: Sequelize.STRING
       },
+      authorName: {
+        type: Sequelize.STRING
+      },
       startDate: {
         type: Sequelize.DATE
       },
