@@ -22,8 +22,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-
-// Fungsi untuk meng-upload ke Cloudinary dari buffer
 function uploadToCloudinary(buffer) {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
@@ -48,20 +46,18 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: false // Hanya jika Anda menggunakan SSL di server PostgreSQL Anda
+      rejectUnauthorized: false
     }
   }
 });
 
-// Membuat pool koneksi
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
-
-// Menggunakan pool untuk query
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
     console.error('Database query error:', err);
@@ -69,7 +65,7 @@ pool.query('SELECT NOW()', (err, res) => {
     console.log('Database connection successful:', res.rows[0]);
   }
 });
-// Define User and Project models
+
 const User = sequelize.define('User', {
   name: DataTypes.STRING,
   email: { type: DataTypes.STRING, unique: true },
@@ -88,42 +84,28 @@ const Project = sequelize.define('Project', {
   authorId: DataTypes.INTEGER
 });
 
-// Sync database
 sequelize.sync()
   .then(() => console.log('Database synchronized'))
   .catch(err => console.error('Database synchronization error:', err));
 
-// Setup session
 const sessionStoreInstance = new sessionStore({
   db: sequelize,
 });
 
 app.use(session({
-  secret: 'yourSecretKey',
+  secret: process.env.SESSION_KEY,
   resave: false,
   saveUninitialized: true,
   store: sessionStoreInstance,
 }));
 sessionStoreInstance.sync();
-// Setup connect-flash
+
 app.use(flash());
-// Middleware untuk mengakses pesan flash di view
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   next();
 });
-
-
-// Setup multer for file uploads
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   }
-// });
 
 app.use((req, res, next) => {
   res.locals.userName = req.session.userName;
@@ -131,20 +113,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// Setup Handlebars view engine
 app.engine('hbs', engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
-
-// Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Static files
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use('/uploads', express.static('uploads'));
 
-// Middleware untuk cek user login
 const isAuthenticated = (req, res, next) => {
   if (req.session.userId) {
     return next();
@@ -152,7 +128,6 @@ const isAuthenticated = (req, res, next) => {
   res.redirect('/login');
 };
 
-// Route untuk halaman home
 app.get('/', async (req, res) => {
   const projects = await Project.findAll();
   res.render('index', {
@@ -175,16 +150,12 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
-
-// Route untuk menangani register
 app.post('/register', upload.single('imageUrl'), async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Cek apakah email sudah ada di database
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      // Kirim pesan error jika email sudah terdaftar
       return res.render('register', {
         errorMessage: 'Email already exists',
         name, // Mengisi kembali form dengan data sebelumnya
@@ -192,7 +163,6 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
       });
     }
 
-    // Jika email belum ada, lanjutkan proses registrasi
     const hashedPassword = await bcrypt.hash(password, 10);
 
     let imageUrl = null;
@@ -201,7 +171,6 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
       imageUrl = result.secure_url;
     }
 
-    // Simpan user ke database
     await User.create({
       name,
       email,
@@ -209,7 +178,6 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
       imageUrl
     });
 
-    // Redirect ke halaman login setelah sukses registrasi
     res.redirect('/login');
   } catch (error) {
     console.error('Error registering user:', error);
@@ -218,7 +186,6 @@ app.post('/register', upload.single('imageUrl'), async (req, res) => {
 });
 
 
-// Route untuk menangani login
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -245,7 +212,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Route untuk halaman profil
 app.get('/profile', isAuthenticated, async (req, res) => {
   try {
     const user = await User.findByPk(req.session.userId);
@@ -260,7 +226,6 @@ app.get('/profile', isAuthenticated, async (req, res) => {
   }
 });
 
-// Route untuk logout
 app.get('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) {
@@ -270,7 +235,6 @@ app.get('/logout', (req, res) => {
   });
 });
 
-// Route untuk halaman addProject
 app.get('/addProject', isAuthenticated, (req, res) => {
   console.log(req.session.userName);
   res.render('addProject', {
@@ -280,7 +244,6 @@ app.get('/addProject', isAuthenticated, (req, res) => {
   });
 });
 
-// Route untuk menambahkan project
 app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (req, res) => {
   try {
     const { projectName, authorName, startDate, endDate, description, technologies } = req.body;
@@ -316,7 +279,6 @@ app.post('/addProject', isAuthenticated, upload.single('uploadImage'), async (re
 
 
 // Route untuk mengupdate proyek
-// Route untuk mendapatkan proyek berdasarkan ID
 app.get('/api/projects/:id', async (req, res) => {
   const projectId = parseInt(req.params.id, 10);
 
@@ -342,42 +304,35 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
   const { projectName, startDate, endDate, description, technologies } = req.body;
 
   try {
-    // Temukan proyek berdasarkan ID
     const project = await Project.findByPk(projectId);
     if (!project) {
       return res.status(404).send('Project not found');
     }
 
-    // Update proyek dengan data baru
     project.projectName = projectName;
-    project.startDate = new Date(startDate); // Pastikan tanggal dikonversi ke Date
+    project.startDate = new Date(startDate);
     project.endDate = new Date(endDate);
     project.description = description;
 
-    // Parse technologies jika diberikan
     if (technologies) {
       try {
-        project.technologies = JSON.parse(technologies); // Asumsikan technologies dikirim dalam bentuk JSON string
+        project.technologies = JSON.parse(technologies);
       } catch (err) {
         console.error('Error parsing technologies:', err);
         return res.status(400).send('Invalid technologies format');
       }
     }
 
-    // Jika ada gambar baru diupload
     if (req.file) {
-      // Hapus gambar lama dari Cloudinary
       if (project.imageUrl) {
         const oldPublicId = project.imageUrl.split('/').pop().split('.')[0];
         await cloudinary.uploader.destroy(oldPublicId);
       }
 
-      // Upload gambar baru ke Cloudinary
       const result = await uploadToCloudinary(req.file.buffer);
       project.imageUrl = result.secure_url;
     }
 
-    // Simpan perubahan ke database
     await project.save();
 
     res.status(200).send('Project updated successfully');
@@ -388,7 +343,6 @@ app.put('/api/projects/:id', isAuthenticated, upload.single('uploadImage'), asyn
 });
 
 
-// Route untuk mendapatkan semua proyek
 app.get('/api/projects', async (req, res) => {
   try {
     const projects = await Project.findAll();
@@ -399,7 +353,6 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-// Route untuk mendapatkan username
 app.get('/getUsername', async (req, res) => {
   return res.json({
     userName: req.session.userName,
@@ -417,17 +370,14 @@ app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
       return res.status(404).send('Project not found');
     }
 
-    // Ekstrak publicId dari imageUrl
     if (project.imageUrl) {
       const publicId = project.imageUrl.split('/').slice(-1)[0].split('.')[0];
       console.log("Deleting image with publicId:", publicId); // Log untuk memastikan publicId benar
 
-      // Hapus gambar dari Cloudinary
       const result = await cloudinary.uploader.destroy(publicId);
       console.log("Cloudinary delete response:", result); // Log untuk melihat respons Cloudinary
     }
 
-    // Hapus project dari database
     await project.destroy();
     res.status(204).send('Project deleted successfully');
   } catch (error) {
@@ -438,14 +388,12 @@ app.delete('/api/projects/:id', isAuthenticated, async (req, res) => {
 
 
 
-// Route untuk halaman contact
 app.get('/contact', (req, res) => {
   res.render('contact', {
     userName: req.session.userName
   });
 });
 
-// Route untuk halaman testimonials
 app.get('/testimonials', (req, res) => {
   res.render('testimonials', {
     userName: req.session.userName
@@ -453,7 +401,6 @@ app.get('/testimonials', (req, res) => {
 });
 
 
-// Route untuk halaman update-my-project
 app.get('/update-my-project', (req, res) => {
   res.render('update-my-project', {
     userName: req.session.userName
@@ -461,7 +408,6 @@ app.get('/update-my-project', (req, res) => {
 });
 
 //DETAIL PROJECT
-// Fungsi untuk menghitung durasi waktu
 function calculateDuration(startDate, endDate) {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -470,38 +416,33 @@ function calculateDuration(startDate, endDate) {
   const monthsDiff = Math.floor(daysDiff / 30); // Kira-kira hitung bulan
   const daysRemaining = daysDiff % 30;
 
-  return `${monthsDiff} months and ${daysRemaining} days`; // Misalnya "3 months and 15 days"
+  return `${monthsDiff} months and ${daysRemaining} days`;
 }
 
-// Route untuk mendapatkan detail project berdasarkan ID
 app.get('/project-detail', async (req, res) => {
-  const projectId = parseInt(req.query.id, 10); // Pastikan ID proyek diambil dari query parameter
+  const projectId = parseInt(req.query.id, 10);
   if (!projectId) {
-    return res.status(400).send('Project ID is required'); // Jika ID tidak valid
+    return res.status(400).send('Project ID is required');
   }
 
   try {
-    // Ambil project berdasarkan ID
     const project = await Project.findByPk(projectId);
 
-    // Jika project tidak ditemukan
     if (!project) {
       return res.status(404).send('Project not found');
     }
 
-    // Buat data yang akan di-render ke template
     const projectData = {
       projectTitle: project.projectName,
       projectImage: project.imageUrl,
       dateRange: `${new Date(project.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} - ${new Date(project.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`,
       timeDuration: calculateDuration(project.startDate, project.endDate),
-      technologies: project.technologies, // Asumsikan teknologi disimpan sebagai array
+      technologies: project.technologies,
       projectDescription: project.description,
       authorName: project.authorName,
-      userName: req.session.userName // Pastikan session berisi userName
+      userName: req.session.userName
     };
 
-    // Render halaman project-detail dan kirim data proyek
     res.render('project-detail', projectData);
   } catch (err) {
     console.error('Error fetching project data:', err);
@@ -512,26 +453,21 @@ app.get('/project-detail', async (req, res) => {
 //-------------UNTUK BAGIAN PROFILE----------------------//
 app.post('/uploadProfileImage', isAuthenticated, upload.single('imageUrl'), async (req, res) => {
   try {
-    // Temukan user berdasarkan sesi login
     const user = await User.findByPk(req.session.userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
-
-    // Hapus gambar lama dari Cloudinary
     if (user.imageUrl) {
       const oldPublicId = user.imageUrl.split('/').pop().split('.')[0];
       await cloudinary.uploader.destroy(oldPublicId);
     }
 
-    // Upload gambar baru ke Cloudinary
     const result = await uploadToCloudinary(req.file.buffer);
     user.imageUrl = result.secure_url;
 
-    // Simpan perubahan di database
     await user.save();
 
-    res.redirect('/profile'); // Redirect kembali ke halaman profil setelah berhasil diupload
+    res.redirect('/profile');
   } catch (error) {
     console.error('Error uploading profile image:', error);
     res.status(500).send('An error occurred while uploading the image.');
@@ -540,23 +476,20 @@ app.post('/uploadProfileImage', isAuthenticated, upload.single('imageUrl'), asyn
 
 app.get('/deleteImageProfile', isAuthenticated, async (req, res) => {
   try {
-    // Temukan user berdasarkan sesi login
     const user = await User.findByPk(req.session.userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
 
-    // Hapus gambar dari Cloudinary
     if (user.imageUrl) {
       const oldPublicId = user.imageUrl.split('/').pop().split('.')[0];
       await cloudinary.uploader.destroy(oldPublicId);
     }
 
-    // Setel URL gambar menjadi null di database
     user.imageUrl = null;
     await user.save();
 
-    res.redirect('/profile'); // Redirect ke halaman profil setelah gambar dihapus
+    res.redirect('/profile');
   } catch (error) {
     console.error('Error deleting profile image:', error);
     res.status(500).send('An error occurred while deleting the image.');
@@ -578,10 +511,9 @@ app.post('/editProfile', isAuthenticated, async (req, res) => {
     const isMatch = await bcrypt.compare(oldPassword, user.password);
     if (!isMatch) {
       req.flash('error_msg', 'Incorrect old password');
-      return res.redirect('/profile'); // Kembalikan ke halaman profil dengan pesan error
+      return res.redirect('/profile');
     }
 
-    // Update nama dan email user
     if (userName) {
       user.name = userName;
     }
@@ -590,7 +522,6 @@ app.post('/editProfile', isAuthenticated, async (req, res) => {
       user.email = email;
     }
 
-    // Simpan perubahan di database
     await user.save();
 
     await Project.update(
