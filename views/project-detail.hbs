@@ -14,30 +14,25 @@
 <body>
   <!-- Navbar -->
   {{> header}}
-  <!-- Main Content -->
+
   <main class="container shadow" style="padding-top: 80px; border-radius: 10px; margin-top: 10px; padding: 20px;">
-    <!-- Project Title -->
     <div class="header-container" style="text-align:center">
       <h1 id="projectTitle">{{projectTitle}}</h1>
     </div>
     <br><br>
 
     <div class="image-and-info">
-      <!-- Project Image -->
       <img id="projectImage" src="{{projectImage}}" alt="Project Image">
 
       <div class="info-section">
         <div class="duration-info">
-          <!-- Project Duration -->
           <p id="projectDuration" style="font-weight: bold;">Duration</p>
 
-          <!-- Date Range -->
           <div class="date-range">
             <i class="fas fa-calendar-alt"></i>
             <span id="dateRange">{{dateRange}}</span>
           </div>
 
-          <!-- Duration in Months -->
           <div class="time-duration">
             <i class="fas fa-clock"></i>
             <span id="timeDuration">{{timeDuration}}</span>
@@ -45,17 +40,14 @@
         </div>
 
         <div class="duration-info">
-          <!-- Project Duration -->
           <p id="projectDuration" style="font-weight: bold;">Author</p>
 
-          <!-- Date Range -->
           <div class="date-range">
             <i class="fas fa-user"></i>
             <span id="dateRange">{{authorName}}</span>
           </div>
         </div>
 
-        <!-- Technologies Used -->
         <section class="technologies">
           <h2>Technologies Used</h2>
           <ul id="techList">
@@ -66,7 +58,6 @@
         </section>
       </div>
     </div>
-    <!-- Project Description -->
     <section class="description">
       <h2>Description</h2>
       <p id="projectDescription">{{projectDescription}}</p>

@@ -15,24 +15,21 @@ fetch("https://api.npoint.io/456f10355d616c72db01")
 
 function displayTestimonials(testimonials) {
   let testimonialsContainer = document.getElementById('testimonials');
-  testimonialsContainer.innerHTML = ''; // Clear existing content
+  testimonialsContainer.innerHTML = '';
 
   testimonials.forEach(function (testimonial) {
     let card = document.createElement('div');
     card.classList.add('testimonial');
 
-    // Create stars
     let stars = '';
     for (let i = 0; i < testimonial.rating; i++) {
       stars += '<i class="fas fa-star"></i>';
     }
 
-    // Handle undefined data
     let name = testimonial.name || 'Anonymous';
     let message = testimonial.message || 'No message provided.';
-    let image = testimonial.image || 'https://via.placeholder.com/150'; // Default image if not provided
+    let image = testimonial.image || 'https://via.placeholder.com/150';
 
-    // Card content
     card.innerHTML = `
       <img class="profile-testimonial" src="${image}" alt="${name}">
       <h3 class="author">${name}</h3>

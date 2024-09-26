@@ -2,7 +2,6 @@
 		.nav-link {
 			position: relative;
 			text-decoration: none;
-			/* Hilangkan garis bawah default */
 		}
 
 		.nav-link::after {
@@ -13,17 +12,13 @@
 			bottom: 0;
 			left: 0;
 			background-color: white;
-			/* Warna garis bawah */
 			transition: width 0.3s ease;
-			/* Animasi garis bawah */
 		}
 
 		.nav-link:hover::after {
 			width: 100%;
-			/* Lebar garis bawah saat hover */
 		}
 
-		/* Menghilangkan garis pada logo social media */
 		.social-media a img {
 			border: none;
 			outline: none;
@@ -31,7 +26,6 @@
 			height: 30px;
 		}
 
-		/* Menambahkan style agar konten di dalam box besar */
 		.content-box {
 			background-color: #f8f9fa;
 			padding: 20px;
@@ -40,7 +34,6 @@
 		}
 
 
-		/* Mengatur jarak yang responsif */
 		.profile-img {
 			width: 100%;
 			height: auto;
@@ -57,7 +50,6 @@
 			margin-top: 20px;
 		}
 
-		/* Mengatur margin pada social-media untuk jarak yang akurat */
 		.social-media a {
 			margin-right: 10px;
 		}

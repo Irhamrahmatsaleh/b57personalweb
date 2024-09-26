@@ -1,13 +1,10 @@
 
-//-------------------------------------------------------------
 
-// Fungsi untuk mendapatkan nilai parameter query dari URL
 function getQueryParameter(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
 
-// Fungsi untuk memuat detail proyek berdasarkan ID dari server
 async function loadProjectDetails() {
   const projectId = getQueryParameter('id');
 
@@ -17,14 +14,13 @@ async function loadProjectDetails() {
   }
 
   try {
-    // Ambil data proyek dari server
     const response = await fetch(`/project-detail?id=${projectId}`);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
 
-    const project = await response.json(); // Pastikan endpoint mengembalikan data dalam format JSON
+    const project = await response.json();
 
     if (!project) {
       console.error('Project not found');
@@ -33,11 +29,9 @@ async function loadProjectDetails() {
       return;
     }
 
-    // Isi elemen di halaman dengan detail proyek
     document.getElementById('projectTitle').textContent = project.projectTitle;
     document.getElementById('projectImage').src = project.projectImage;
 
-    // Format tanggal menjadi "9 Sep 2024 - 6 Nov 2024"
     const formattedStartDate = new Date(project.startDate).toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -53,9 +47,8 @@ async function loadProjectDetails() {
     document.getElementById('timeDuration').textContent = getProjectDuration(project.startDate, project.endDate);
     document.getElementById('projectDescription').textContent = project.projectDescription;
 
-    // Tampilkan teknologi yang digunakan
     const techList = document.getElementById('techList');
-    techList.innerHTML = ''; // Bersihkan terlebih dahulu
+    techList.innerHTML = '';
     project.technologies.forEach(tech => {
       const li = document.createElement('li');
       li.textContent = tech;
@@ -67,7 +60,6 @@ async function loadProjectDetails() {
   }
 }
 
-// Fungsi untuk menghitung durasi proyek dalam bulan
 function getProjectDuration(startDate, endDate) {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -75,5 +67,4 @@ function getProjectDuration(startDate, endDate) {
   return `${duration} months`;
 }
 
-// Muat detail proyek ketika halaman dimuat
 document.addEventListener('DOMContentLoaded', loadProjectDetails);

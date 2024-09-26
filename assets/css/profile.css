@@ -31,7 +31,6 @@ body {
   height: auto;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
-  /* Add border-radius to the top corners */
 }
 
 .profile-card-body {
@@ -60,23 +59,15 @@ body {
   border-color: #004085;
 }
 
-/* Footer style to ensure it stays at the bottom */
-/* footer {
-  margin-top: auto;
-} */
 footer {
   background: #f8f9fa;
-  /* Sesuaikan dengan warna footer Anda */
   padding: 1rem;
   text-align: center;
   width: 100%;
 }
 
-/* Styling for the profile heading */
 h1.mb-4 {
   text-align: center;
   margin-bottom: 40px;
-  /* Add bottom margin to space out from the card */
   margin-top: -2px;
-  /* Add top margin to space out from the top of the page */
 }

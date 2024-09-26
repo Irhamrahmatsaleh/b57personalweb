@@ -1,9 +1,9 @@
-// Menampilkan daftar proyek
+
 function displayProjects() {
   const projects = JSON.parse(localStorage.getItem('projects')) || [];
   const projectList = document.getElementById('projectList');
 
-  projectList.innerHTML = ''; // Bersihkan daftar proyek
+  projectList.innerHTML = '';
 
   projects.forEach(project => {
     const projectCard = document.createElement('div');
@@ -22,23 +22,19 @@ function displayProjects() {
   });
 }
 
-// Tampilkan detail proyek
 function viewProject(id) {
   window.location.href = `project-detail.html?projectId=${id}`;
 }
 
-// Edit proyek
 function editProject(id) {
   window.location.href = `update-my-project.html?editId=${id}`;
 }
 
-// Hapus proyek
 function deleteProject(id) {
   let projects = JSON.parse(localStorage.getItem('projects')) || [];
   projects = projects.filter(proj => proj.id !== id);
   localStorage.setItem('projects', JSON.stringify(projects));
-  displayProjects(); // Update tampilan setelah hapus
+  displayProjects();
 }
 
-// Muat daftar proyek saat halaman dimuat
 document.addEventListener('DOMContentLoaded', displayProjects);
